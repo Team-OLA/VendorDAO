@@ -1,0 +1,168 @@
+{
+  "app": {
+    "name": "VendorDAO",
+    "tagline": "Financement des fournisseurs municipaux, ouvert et transparent, propulsé par Polkadot."
+  },
+  "nav": { "dashboard": "Tableau de bord", "proposals": "Propositions", "vendors": "Fournisseurs", "ledger": "Registre" },
+  "wallet": {
+    "connect": "Connecter le portefeuille",
+    "connecting": "Connexion…",
+    "noExtension": "Aucune extension de portefeuille trouvée",
+    "selectAccount": "Compte"
+  },
+  "dashboard": {
+    "subtitle": "Un registre public et transparent de chaque fonds collecté et de chaque proposition financée.",
+    "treasuryBalance": "Solde du Trésor",
+    "totalReceived": "Total Reçu",
+    "totalDisbursed": "Total Déboursé",
+    "potAddress": "Compte du Trésor",
+    "recentProposals": "Propositions Récentes",
+    "viewAll": "Voir toutes les propositions",
+    "contribute": "Contribuer",
+    "contributeSubmit": "Envoyer",
+    "fundingHistory": "Historique de Financement",
+    "categoryBreakdown": "Financement par Catégorie"
+  },
+  "status": {
+    "Proposed": "Vote en cours",
+    "Approved": "Approuvée",
+    "Rejected": "Rejetée",
+    "Funded": "Financée",
+    "Cancelled": "Annulée"
+  },
+  "proposals": {
+    "title": "Propositions",
+    "submitNew": "Soumettre une proposition",
+    "empty": "Aucune proposition pour l'instant. Soyez le premier à en soumettre une.",
+    "amountRequested": "Montant demandé",
+    "ayes": "Pour",
+    "nays": "Contre",
+    "votingEndsAtBlock": "Le vote se termine au bloc {{block}}",
+    "viewDetails": "Voir les détails"
+  },
+  "proposalDetail": {
+    "back": "Retour aux propositions",
+    "proposedBy": "Proposée par",
+    "vendor": "Fournisseur",
+    "voteAye": "Voter Pour",
+    "voteNay": "Voter Contre",
+    "alreadyVoted": "Vous avez déjà voté sur cette proposition.",
+    "connectToVote": "Connectez votre portefeuille pour voter.",
+    "closeVoting": "Dépouiller les votes",
+    "retryDisbursement": "Réessayer le décaissement",
+    "translate": "Traduire",
+    "showOriginal": "Afficher l'original",
+    "translating": "Traduction…",
+    "notFound": "Proposition introuvable."
+  },
+  "newProposal": {
+    "title": "Soumettre une proposition",
+    "vendorLabel": "Fournisseur",
+    "selectVendor": "Sélectionnez un fournisseur enregistré",
+    "titleLabel": "Titre",
+    "descriptionLabel": "Description",
+    "amountLabel": "Montant demandé",
+    "submit": "Soumettre la proposition",
+    "submitting": "Envoi…",
+    "success": "Proposition soumise !",
+    "noVendors": "Aucun fournisseur n'est encore enregistré."
+  },
+  "vendors": {
+    "title": "Registre des Fournisseurs",
+    "registerNew": "S'enregistrer comme fournisseur",
+    "empty": "Aucun fournisseur enregistré pour l'instant.",
+    "verified": "Vérifié",
+    "unverified": "Non vérifié",
+    "totalReceived": "Total Reçu",
+    "proposalsFunded": "Propositions Financées",
+    "registeredAt": "Enregistré au bloc {{block}}",
+    "category": "Catégorie",
+    "contact": "Contact"
+  },
+  "registerVendor": {
+    "title": "S'enregistrer comme fournisseur",
+    "nameLabel": "Nom du fournisseur / de l'entreprise",
+    "categoryLabel": "Catégorie",
+    "descriptionLabel": "Description des services proposés",
+    "contactLabel": "Contact public (e-mail, téléphone ou site web)",
+    "emailLabel": "Adresse e-mail",
+    "businessAddressLabel": "Adresse de l'entreprise",
+    "websiteLabel": "Site web (facultatif)",
+    "verifyEmail": "Vérifier l'e-mail",
+    "emailVerified": "E-mail vérifié",
+    "captchaPrompt": "Pour vérifier que vous êtes humain, résolvez : {{question}}",
+    "sendCode": "Envoyer le code",
+    "enterCode": "Entrez le code à 6 chiffres envoyé à votre e-mail",
+    "devCodeNotice": "L'envoi d'e-mails n'est pas configuré — utilisation de ce code pour les tests :",
+    "confirmCode": "Confirmer",
+    "resendCode": "Renvoyer le code",
+    "verifyEmailFirst": "Veuillez vérifier votre e-mail avant de vous inscrire.",
+    "verificationFailed": "La vérification a échoué. Veuillez réessayer.",
+    "submit": "S'enregistrer",
+    "submitting": "Enregistrement…",
+    "success": "Vous êtes maintenant enregistré comme fournisseur !"
+  },
+  "vendorCategory": {
+    "Construction": "Construction",
+    "ParksAndRecreation": "Parcs et Loisirs",
+    "ArtsAndCulture": "Arts et Culture",
+    "Environmental": "Environnement",
+    "Housing": "Logement",
+    "Infrastructure": "Infrastructure",
+    "Technology": "Technologie",
+    "FoodAndAgriculture": "Alimentation et Agriculture",
+    "YouthAndCommunity": "Jeunesse et Communauté",
+    "PublicSafety": "Sécurité Publique",
+    "Other": "Autre"
+  },
+  "common": {
+    "loading": "Chargement…",
+    "error": "Erreur",
+    "address": "Adresse",
+    "close": "Fermer",
+    "connectWalletFirst": "Connectez d'abord votre portefeuille."
+  },
+  "demo": {
+    "banner": "Mode Démo — données d'exemple sur la revitalisation de Détroit. Aucune connexion réelle à la chaîne n'est utilisée.",
+    "toggleOn": "Mode Démo : Activé",
+    "toggleOff": "Mode Démo : Désactivé",
+    "reset": "Réinitialiser les données de démo"
+  },
+  "charts": {
+    "noData": "Pas encore assez de données pour afficher un graphique."
+  },
+  "ledger": {
+    "title": "Registre des Transactions",
+    "subtitle": "Chaque contribution au trésor, proposition et décaissement — entièrement public et vérifiable.",
+    "block": "Bloc",
+    "type": "Type",
+    "description": "Description",
+    "amount": "Montant",
+    "party": "Partie",
+    "empty": "Aucune transaction pour l'instant."
+  },
+  "ledgerType": {
+    "TreasuryContribution": "Contribution au Trésor",
+    "VendorRegistered": "Fournisseur Enregistré",
+    "ProposalSubmitted": "Proposition Soumise",
+    "ProposalFunded": "Proposition Financée",
+    "ProposalRejected": "Proposition Rejetée",
+    "ProposalCancelled": "Proposition Annulée"
+  },
+  "vendorDetail": {
+    "back": "Retour aux fournisseurs",
+    "notFound": "Fournisseur introuvable.",
+    "updatesTitle": "Mises à jour",
+    "noUpdates": "Aucune mise à jour publiée pour le moment.",
+    "postedAtBlock": "Publié au bloc {{block}}",
+    "relatedProposal": "Proposition associée",
+    "postUpdate": "Publier une mise à jour",
+    "updatePlaceholder": "Partagez l'avancement des travaux financés avec la communauté…",
+    "linkProposal": "Lier à une proposition financée (facultatif)",
+    "noProposalOption": "Aucune proposition spécifique",
+    "post": "Publier la Mise à Jour",
+    "posting": "Publication…",
+    "onlyVendorCanPost": "Connectez le portefeuille de ce fournisseur pour publier des mises à jour.",
+    "postSuccess": "Mise à jour publiée !"
+  }
+}

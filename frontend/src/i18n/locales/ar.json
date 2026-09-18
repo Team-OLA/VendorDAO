@@ -1,0 +1,168 @@
+{
+  "app": {
+    "name": "VendorDAO",
+    "tagline": "تمويل مزوّدي الخدمات على مستوى المدينة، بشكل مفتوح وشفاف، مدعوم بتقنية بولكادوت."
+  },
+  "nav": { "dashboard": "لوحة التحكم", "proposals": "المقترحات", "vendors": "المزوّدون", "ledger": "السجل" },
+  "wallet": {
+    "connect": "ربط المحفظة",
+    "connecting": "جارٍ الاتصال…",
+    "noExtension": "لم يتم العثور على إضافة محفظة",
+    "selectAccount": "الحساب"
+  },
+  "dashboard": {
+    "subtitle": "سجل عام وشفاف على السلسلة لكل الأموال التي تم جمعها وكل مقترح تم تمويله.",
+    "treasuryBalance": "رصيد الخزينة",
+    "totalReceived": "إجمالي المُستلَم",
+    "totalDisbursed": "إجمالي المصروف",
+    "potAddress": "حساب الخزينة",
+    "recentProposals": "أحدث المقترحات",
+    "viewAll": "عرض جميع المقترحات",
+    "contribute": "مساهمة",
+    "contributeSubmit": "إرسال",
+    "fundingHistory": "تاريخ التمويل",
+    "categoryBreakdown": "التمويل حسب الفئة"
+  },
+  "status": {
+    "Proposed": "التصويت مفتوح",
+    "Approved": "تمت الموافقة",
+    "Rejected": "مرفوض",
+    "Funded": "تم التمويل",
+    "Cancelled": "ملغى"
+  },
+  "proposals": {
+    "title": "المقترحات",
+    "submitNew": "إرسال مقترح",
+    "empty": "لا توجد مقترحات بعد. كن أول من يرسل واحدًا.",
+    "amountRequested": "المبلغ المطلوب",
+    "ayes": "موافق",
+    "nays": "معارض",
+    "votingEndsAtBlock": "ينتهي التصويت عند الكتلة {{block}}",
+    "viewDetails": "عرض التفاصيل"
+  },
+  "proposalDetail": {
+    "back": "العودة إلى المقترحات",
+    "proposedBy": "اقتُرح من قِبل",
+    "vendor": "المزوّد",
+    "voteAye": "التصويت بالموافقة",
+    "voteNay": "التصويت بالرفض",
+    "alreadyVoted": "لقد صوّتَ بالفعل على هذا المقترح.",
+    "connectToVote": "اربط محفظتك للتصويت.",
+    "closeVoting": "احتساب الأصوات",
+    "retryDisbursement": "إعادة محاولة الصرف",
+    "translate": "ترجمة",
+    "showOriginal": "عرض النص الأصلي",
+    "translating": "جارٍ الترجمة…",
+    "notFound": "المقترح غير موجود."
+  },
+  "newProposal": {
+    "title": "إرسال مقترح",
+    "vendorLabel": "المزوّد",
+    "selectVendor": "اختر مزوّدًا مسجلاً",
+    "titleLabel": "العنوان",
+    "descriptionLabel": "الوصف",
+    "amountLabel": "المبلغ المطلوب",
+    "submit": "إرسال المقترح",
+    "submitting": "جارٍ الإرسال…",
+    "success": "تم إرسال المقترح!",
+    "noVendors": "لا يوجد مزوّدون مسجلون بعد."
+  },
+  "vendors": {
+    "title": "سجل المزوّدين",
+    "registerNew": "التسجيل كمزوّد",
+    "empty": "لا يوجد مزوّدون مسجلون بعد.",
+    "verified": "موثّق",
+    "unverified": "غير موثّق",
+    "totalReceived": "إجمالي المُستلَم",
+    "proposalsFunded": "المقترحات المموَّلة",
+    "registeredAt": "سُجِّل عند الكتلة {{block}}",
+    "category": "الفئة",
+    "contact": "التواصل"
+  },
+  "registerVendor": {
+    "title": "التسجيل كمزوّد",
+    "nameLabel": "اسم المزوّد / النشاط التجاري",
+    "categoryLabel": "الفئة",
+    "descriptionLabel": "وصف الخدمات المقدَّمة",
+    "contactLabel": "معلومات التواصل العامة (بريد إلكتروني، هاتف، أو موقع إلكتروني)",
+    "emailLabel": "البريد الإلكتروني",
+    "businessAddressLabel": "عنوان العمل",
+    "websiteLabel": "الموقع الإلكتروني (اختياري)",
+    "verifyEmail": "تحقق من البريد الإلكتروني",
+    "emailVerified": "تم التحقق من البريد الإلكتروني",
+    "captchaPrompt": "للتحقق من أنك إنسان، احسب: {{question}}",
+    "sendCode": "إرسال الرمز",
+    "enterCode": "أدخل الرمز المكوّن من 6 أرقام المُرسَل إلى بريدك الإلكتروني",
+    "devCodeNotice": "إرسال البريد الإلكتروني غير مُهيَّأ — استخدام هذا الرمز للاختبار:",
+    "confirmCode": "تأكيد",
+    "resendCode": "إعادة إرسال الرمز",
+    "verifyEmailFirst": "يرجى التحقق من بريدك الإلكتروني قبل التسجيل.",
+    "verificationFailed": "فشل التحقق. يرجى المحاولة مرة أخرى.",
+    "submit": "تسجيل",
+    "submitting": "جارٍ التسجيل…",
+    "success": "أنت الآن مسجَّل كمزوّد!"
+  },
+  "vendorCategory": {
+    "Construction": "البناء",
+    "ParksAndRecreation": "الحدائق والترفيه",
+    "ArtsAndCulture": "الفنون والثقافة",
+    "Environmental": "البيئة",
+    "Housing": "الإسكان",
+    "Infrastructure": "البنية التحتية",
+    "Technology": "التكنولوجيا",
+    "FoodAndAgriculture": "الغذاء والزراعة",
+    "YouthAndCommunity": "الشباب والمجتمع",
+    "PublicSafety": "السلامة العامة",
+    "Other": "أخرى"
+  },
+  "common": {
+    "loading": "جارٍ التحميل…",
+    "error": "خطأ",
+    "address": "العنوان",
+    "close": "إغلاق",
+    "connectWalletFirst": "اربط محفظتك أولاً."
+  },
+  "demo": {
+    "banner": "وضع العرض التجريبي — يعرض بيانات تجريبية لإعادة إحياء مدينة ديترويت. لا يوجد اتصال فعلي بالسلسلة.",
+    "toggleOn": "وضع العرض التجريبي: مفعّل",
+    "toggleOff": "وضع العرض التجريبي: متوقف",
+    "reset": "إعادة تعيين بيانات العرض التجريبي"
+  },
+  "charts": {
+    "noData": "لا توجد بيانات كافية بعد لعرض رسم بياني."
+  },
+  "ledger": {
+    "title": "سجل المعاملات",
+    "subtitle": "كل مساهمة في الخزينة، ومقترح، وصرف — علني وقابل للتدقيق بالكامل.",
+    "block": "الكتلة",
+    "type": "النوع",
+    "description": "الوصف",
+    "amount": "المبلغ",
+    "party": "الطرف",
+    "empty": "لا توجد معاملات بعد."
+  },
+  "ledgerType": {
+    "TreasuryContribution": "مساهمة في الخزينة",
+    "VendorRegistered": "تسجيل مزوّد",
+    "ProposalSubmitted": "تقديم مقترح",
+    "ProposalFunded": "تمويل مقترح",
+    "ProposalRejected": "رفض مقترح",
+    "ProposalCancelled": "إلغاء مقترح"
+  },
+  "vendorDetail": {
+    "back": "العودة إلى المزوّدين",
+    "notFound": "المزوّد غير موجود.",
+    "updatesTitle": "التحديثات",
+    "noUpdates": "لم يتم نشر أي تحديثات بعد.",
+    "postedAtBlock": "نُشر في الكتلة {{block}}",
+    "relatedProposal": "المقترح المرتبط",
+    "postUpdate": "نشر تحديث",
+    "updatePlaceholder": "شارك التقدم في العمل الممول مع المجتمع…",
+    "linkProposal": "ربط بمقترح ممول (اختياري)",
+    "noProposalOption": "لا يوجد مقترح محدد",
+    "post": "نشر التحديث",
+    "posting": "جارٍ النشر…",
+    "onlyVendorCanPost": "قم بتوصيل محفظة هذا المزوّد نفسه لنشر التحديثات.",
+    "postSuccess": "تم نشر التحديث!"
+  }
+}

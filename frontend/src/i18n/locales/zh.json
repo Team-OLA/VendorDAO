@@ -1,0 +1,168 @@
+{
+  "app": {
+    "name": "VendorDAO",
+    "tagline": "由 Polkadot 提供支持的、开放透明的全市供应商资助平台。"
+  },
+  "nav": { "dashboard": "仪表盘", "proposals": "提案", "vendors": "供应商", "ledger": "账本" },
+  "wallet": {
+    "connect": "连接钱包",
+    "connecting": "连接中…",
+    "noExtension": "未找到钱包扩展程序",
+    "selectAccount": "账户"
+  },
+  "dashboard": {
+    "subtitle": "一份公开、链上、透明的账本,记录每一笔筹集的资金和每一个获得资助的提案。",
+    "treasuryBalance": "国库余额",
+    "totalReceived": "累计收到",
+    "totalDisbursed": "累计支出",
+    "potAddress": "国库账户",
+    "recentProposals": "最新提案",
+    "viewAll": "查看所有提案",
+    "contribute": "捐助",
+    "contributeSubmit": "发送",
+    "fundingHistory": "资助历史",
+    "categoryBreakdown": "按类别划分的资助"
+  },
+  "status": {
+    "Proposed": "投票中",
+    "Approved": "已批准",
+    "Rejected": "已否决",
+    "Funded": "已拨款",
+    "Cancelled": "已取消"
+  },
+  "proposals": {
+    "title": "提案",
+    "submitNew": "提交提案",
+    "empty": "暂无提案,快来提交第一个吧。",
+    "amountRequested": "申请金额",
+    "ayes": "赞成票",
+    "nays": "反对票",
+    "votingEndsAtBlock": "投票将在区块 {{block}} 结束",
+    "viewDetails": "查看详情"
+  },
+  "proposalDetail": {
+    "back": "返回提案列表",
+    "proposedBy": "提案人",
+    "vendor": "供应商",
+    "voteAye": "投赞成票",
+    "voteNay": "投反对票",
+    "alreadyVoted": "您已对该提案投过票。",
+    "connectToVote": "请先连接钱包以投票。",
+    "closeVoting": "统计票数",
+    "retryDisbursement": "重试拨款",
+    "translate": "翻译",
+    "showOriginal": "显示原文",
+    "translating": "翻译中…",
+    "notFound": "未找到该提案。"
+  },
+  "newProposal": {
+    "title": "提交提案",
+    "vendorLabel": "供应商",
+    "selectVendor": "选择一个已注册的供应商",
+    "titleLabel": "标题",
+    "descriptionLabel": "描述",
+    "amountLabel": "申请金额",
+    "submit": "提交提案",
+    "submitting": "提交中…",
+    "success": "提案已提交!",
+    "noVendors": "尚无已注册的供应商。"
+  },
+  "vendors": {
+    "title": "供应商名录",
+    "registerNew": "注册为供应商",
+    "empty": "尚无已注册的供应商。",
+    "verified": "已认证",
+    "unverified": "未认证",
+    "totalReceived": "累计收到",
+    "proposalsFunded": "已资助提案数",
+    "registeredAt": "于区块 {{block}} 注册",
+    "category": "类别",
+    "contact": "联系方式"
+  },
+  "registerVendor": {
+    "title": "注册为供应商",
+    "nameLabel": "供应商/企业名称",
+    "categoryLabel": "类别",
+    "descriptionLabel": "提供的服务描述",
+    "contactLabel": "公开联系方式(电子邮件、电话或网站)",
+    "emailLabel": "电子邮箱",
+    "businessAddressLabel": "营业地址",
+    "websiteLabel": "网站(可选)",
+    "verifyEmail": "验证邮箱",
+    "emailVerified": "邮箱已验证",
+    "captchaPrompt": "为验证您是真人,请计算:{{question}}",
+    "sendCode": "发送验证码",
+    "enterCode": "请输入发送到您邮箱的6位验证码",
+    "devCodeNotice": "邮件发送未配置 — 使用此验证码进行测试:",
+    "confirmCode": "确认",
+    "resendCode": "重新发送验证码",
+    "verifyEmailFirst": "请先验证您的邮箱再注册。",
+    "verificationFailed": "验证失败,请重试。",
+    "submit": "注册",
+    "submitting": "注册中…",
+    "success": "您已成功注册为供应商!"
+  },
+  "vendorCategory": {
+    "Construction": "建筑",
+    "ParksAndRecreation": "公园与娱乐",
+    "ArtsAndCulture": "艺术与文化",
+    "Environmental": "环境",
+    "Housing": "住房",
+    "Infrastructure": "基础设施",
+    "Technology": "技术",
+    "FoodAndAgriculture": "食品与农业",
+    "YouthAndCommunity": "青年与社区",
+    "PublicSafety": "公共安全",
+    "Other": "其他"
+  },
+  "common": {
+    "loading": "加载中…",
+    "error": "错误",
+    "address": "地址",
+    "close": "关闭",
+    "connectWalletFirst": "请先连接您的钱包。"
+  },
+  "demo": {
+    "banner": "演示模式 — 展示底特律复兴示例数据,未连接真实链上节点。",
+    "toggleOn": "演示模式:开启",
+    "toggleOff": "演示模式:关闭",
+    "reset": "重置演示数据"
+  },
+  "charts": {
+    "noData": "数据不足,暂无法绘制图表。"
+  },
+  "ledger": {
+    "title": "交易账本",
+    "subtitle": "每一笔国库捐款、提案与拨款 — 完全公开、可审计。",
+    "block": "区块",
+    "type": "类型",
+    "description": "描述",
+    "amount": "金额",
+    "party": "相关方",
+    "empty": "暂无交易记录。"
+  },
+  "ledgerType": {
+    "TreasuryContribution": "国库捐款",
+    "VendorRegistered": "供应商注册",
+    "ProposalSubmitted": "提案提交",
+    "ProposalFunded": "提案已拨款",
+    "ProposalRejected": "提案已否决",
+    "ProposalCancelled": "提案已取消"
+  },
+  "vendorDetail": {
+    "back": "返回供应商列表",
+    "notFound": "未找到该供应商。",
+    "updatesTitle": "动态更新",
+    "noUpdates": "尚未发布任何更新。",
+    "postedAtBlock": "发布于区块 {{block}}",
+    "relatedProposal": "相关提案",
+    "postUpdate": "发布更新",
+    "updatePlaceholder": "与社区分享已拨款项目的进展…",
+    "linkProposal": "关联一个已拨款的提案(可选)",
+    "noProposalOption": "不关联具体提案",
+    "post": "发布更新",
+    "posting": "发布中…",
+    "onlyVendorCanPost": "请连接该供应商自己的钱包账户以发布更新。",
+    "postSuccess": "更新已发布!"
+  }
+}

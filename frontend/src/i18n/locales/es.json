@@ -1,0 +1,168 @@
+{
+  "app": {
+    "name": "VendorDAO",
+    "tagline": "Financiación de proveedores municipales, abierta y transparente, impulsada por Polkadot."
+  },
+  "nav": { "dashboard": "Panel", "proposals": "Propuestas", "vendors": "Proveedores", "ledger": "Libro Mayor" },
+  "wallet": {
+    "connect": "Conectar Billetera",
+    "connecting": "Conectando…",
+    "noExtension": "No se encontró ninguna extensión de billetera",
+    "selectAccount": "Cuenta"
+  },
+  "dashboard": {
+    "subtitle": "Un registro público en cadena de cada fondo recaudado y cada propuesta financiada.",
+    "treasuryBalance": "Saldo del Tesoro",
+    "totalReceived": "Total Recibido",
+    "totalDisbursed": "Total Desembolsado",
+    "potAddress": "Cuenta del Tesoro",
+    "recentProposals": "Propuestas Recientes",
+    "viewAll": "Ver todas las propuestas",
+    "contribute": "Contribuir",
+    "contributeSubmit": "Enviar",
+    "fundingHistory": "Historial de Financiación",
+    "categoryBreakdown": "Financiación por Categoría"
+  },
+  "status": {
+    "Proposed": "Votación Abierta",
+    "Approved": "Aprobada",
+    "Rejected": "Rechazada",
+    "Funded": "Financiada",
+    "Cancelled": "Cancelada"
+  },
+  "proposals": {
+    "title": "Propuestas",
+    "submitNew": "Enviar una Propuesta",
+    "empty": "Aún no hay propuestas. Sé el primero en enviar una.",
+    "amountRequested": "Monto Solicitado",
+    "ayes": "A favor",
+    "nays": "En contra",
+    "votingEndsAtBlock": "La votación termina en el bloque {{block}}",
+    "viewDetails": "Ver detalles"
+  },
+  "proposalDetail": {
+    "back": "Volver a propuestas",
+    "proposedBy": "Propuesta por",
+    "vendor": "Proveedor",
+    "voteAye": "Votar a Favor",
+    "voteNay": "Votar en Contra",
+    "alreadyVoted": "Ya votaste en esta propuesta.",
+    "connectToVote": "Conecta tu billetera para votar.",
+    "closeVoting": "Contar votos",
+    "retryDisbursement": "Reintentar desembolso",
+    "translate": "Traducir",
+    "showOriginal": "Mostrar original",
+    "translating": "Traduciendo…",
+    "notFound": "Propuesta no encontrada."
+  },
+  "newProposal": {
+    "title": "Enviar una Propuesta",
+    "vendorLabel": "Proveedor",
+    "selectVendor": "Selecciona un proveedor registrado",
+    "titleLabel": "Título",
+    "descriptionLabel": "Descripción",
+    "amountLabel": "Monto Solicitado",
+    "submit": "Enviar Propuesta",
+    "submitting": "Enviando…",
+    "success": "¡Propuesta enviada!",
+    "noVendors": "Aún no hay proveedores registrados."
+  },
+  "vendors": {
+    "title": "Registro de Proveedores",
+    "registerNew": "Registrarse como Proveedor",
+    "empty": "Aún no hay proveedores registrados.",
+    "verified": "Verificado",
+    "unverified": "No verificado",
+    "totalReceived": "Total Recibido",
+    "proposalsFunded": "Propuestas Financiadas",
+    "registeredAt": "Registrado en el bloque {{block}}",
+    "category": "Categoría",
+    "contact": "Contacto"
+  },
+  "registerVendor": {
+    "title": "Registrarse como Proveedor",
+    "nameLabel": "Nombre del Proveedor / Negocio",
+    "categoryLabel": "Categoría",
+    "descriptionLabel": "Descripción de los servicios ofrecidos",
+    "contactLabel": "Contacto público (correo, teléfono o sitio web)",
+    "emailLabel": "Correo electrónico",
+    "businessAddressLabel": "Dirección del negocio",
+    "websiteLabel": "Sitio web (opcional)",
+    "verifyEmail": "Verificar correo electrónico",
+    "emailVerified": "Correo verificado",
+    "captchaPrompt": "Para verificar que eres humano, resuelve: {{question}}",
+    "sendCode": "Enviar código",
+    "enterCode": "Ingresa el código de 6 dígitos enviado a tu correo",
+    "devCodeNotice": "El envío de correo no está configurado — usando este código para pruebas:",
+    "confirmCode": "Confirmar",
+    "resendCode": "Reenviar código",
+    "verifyEmailFirst": "Verifica tu correo electrónico antes de registrarte.",
+    "verificationFailed": "La verificación falló. Inténtalo de nuevo.",
+    "submit": "Registrar",
+    "submitting": "Registrando…",
+    "success": "¡Ahora estás registrado como proveedor!"
+  },
+  "vendorCategory": {
+    "Construction": "Construcción",
+    "ParksAndRecreation": "Parques y Recreación",
+    "ArtsAndCulture": "Artes y Cultura",
+    "Environmental": "Medio Ambiente",
+    "Housing": "Vivienda",
+    "Infrastructure": "Infraestructura",
+    "Technology": "Tecnología",
+    "FoodAndAgriculture": "Alimentación y Agricultura",
+    "YouthAndCommunity": "Juventud y Comunidad",
+    "PublicSafety": "Seguridad Pública",
+    "Other": "Otro"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "error": "Error",
+    "address": "Dirección",
+    "close": "Cerrar",
+    "connectWalletFirst": "Conecta primero tu billetera."
+  },
+  "demo": {
+    "banner": "Modo Demo — mostrando datos de ejemplo de la revitalización de Detroit. No se usa conexión real a la cadena.",
+    "toggleOn": "Modo Demo: Activado",
+    "toggleOff": "Modo Demo: Desactivado",
+    "reset": "Restablecer datos de demo"
+  },
+  "charts": {
+    "noData": "Aún no hay suficientes datos para mostrar un gráfico."
+  },
+  "ledger": {
+    "title": "Libro de Transacciones",
+    "subtitle": "Cada contribución al tesoro, propuesta y desembolso: totalmente público y auditable.",
+    "block": "Bloque",
+    "type": "Tipo",
+    "description": "Descripción",
+    "amount": "Monto",
+    "party": "Parte",
+    "empty": "Aún no hay transacciones."
+  },
+  "ledgerType": {
+    "TreasuryContribution": "Contribución al Tesoro",
+    "VendorRegistered": "Proveedor Registrado",
+    "ProposalSubmitted": "Propuesta Enviada",
+    "ProposalFunded": "Propuesta Financiada",
+    "ProposalRejected": "Propuesta Rechazada",
+    "ProposalCancelled": "Propuesta Cancelada"
+  },
+  "vendorDetail": {
+    "back": "Volver a proveedores",
+    "notFound": "Proveedor no encontrado.",
+    "updatesTitle": "Actualizaciones",
+    "noUpdates": "Aún no se han publicado actualizaciones.",
+    "postedAtBlock": "Publicado en el bloque {{block}}",
+    "relatedProposal": "Propuesta relacionada",
+    "postUpdate": "Publicar una actualización",
+    "updatePlaceholder": "Comparte el progreso del trabajo financiado con la comunidad…",
+    "linkProposal": "Vincular a una propuesta financiada (opcional)",
+    "noProposalOption": "Ninguna propuesta específica",
+    "post": "Publicar Actualización",
+    "posting": "Publicando…",
+    "onlyVendorCanPost": "Conecta la cuenta de billetera propia de este proveedor para publicar actualizaciones.",
+    "postSuccess": "¡Actualización publicada!"
+  }
+}

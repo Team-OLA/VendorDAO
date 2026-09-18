@@ -1,0 +1,168 @@
+{
+  "app": {
+    "name": "VendorDAO",
+    "tagline": "Polkadot द्वारा संचालित, संपूर्ण शहर के लिए खुला और पारदर्शी वेंडर फंडिंग मंच।"
+  },
+  "nav": { "dashboard": "डैशबोर्ड", "proposals": "प्रस्ताव", "vendors": "विक्रेता", "ledger": "खाता-बही" },
+  "wallet": {
+    "connect": "वॉलेट कनेक्ट करें",
+    "connecting": "कनेक्ट हो रहा है…",
+    "noExtension": "कोई वॉलेट एक्सटेंशन नहीं मिला",
+    "selectAccount": "खाता"
+  },
+  "dashboard": {
+    "subtitle": "हर जुटाई गई राशि और हर वित्तपोषित प्रस्ताव का एक सार्वजनिक, ऑन-चेन और पारदर्शी लेखा।",
+    "treasuryBalance": "कोष शेष राशि",
+    "totalReceived": "कुल प्राप्त",
+    "totalDisbursed": "कुल वितरित",
+    "potAddress": "कोष खाता",
+    "recentProposals": "हाल के प्रस्ताव",
+    "viewAll": "सभी प्रस्ताव देखें",
+    "contribute": "योगदान करें",
+    "contributeSubmit": "भेजें",
+    "fundingHistory": "फंडिंग इतिहास",
+    "categoryBreakdown": "श्रेणी के अनुसार फंडिंग"
+  },
+  "status": {
+    "Proposed": "मतदान जारी",
+    "Approved": "स्वीकृत",
+    "Rejected": "अस्वीकृत",
+    "Funded": "वित्तपोषित",
+    "Cancelled": "रद्द"
+  },
+  "proposals": {
+    "title": "प्रस्ताव",
+    "submitNew": "प्रस्ताव सबमिट करें",
+    "empty": "अभी तक कोई प्रस्ताव नहीं है। सबसे पहले एक सबमिट करें।",
+    "amountRequested": "मांगी गई राशि",
+    "ayes": "पक्ष में",
+    "nays": "विपक्ष में",
+    "votingEndsAtBlock": "मतदान ब्लॉक {{block}} पर समाप्त होगा",
+    "viewDetails": "विवरण देखें"
+  },
+  "proposalDetail": {
+    "back": "प्रस्तावों पर वापस जाएं",
+    "proposedBy": "प्रस्तावक",
+    "vendor": "विक्रेता",
+    "voteAye": "पक्ष में वोट करें",
+    "voteNay": "विपक्ष में वोट करें",
+    "alreadyVoted": "आप पहले ही इस प्रस्ताव पर वोट कर चुके हैं।",
+    "connectToVote": "वोट करने के लिए अपना वॉलेट कनेक्ट करें।",
+    "closeVoting": "वोटों की गिनती करें",
+    "retryDisbursement": "भुगतान पुनः प्रयास करें",
+    "translate": "अनुवाद करें",
+    "showOriginal": "मूल दिखाएं",
+    "translating": "अनुवाद हो रहा है…",
+    "notFound": "प्रस्ताव नहीं मिला।"
+  },
+  "newProposal": {
+    "title": "प्रस्ताव सबमिट करें",
+    "vendorLabel": "विक्रेता",
+    "selectVendor": "एक पंजीकृत विक्रेता चुनें",
+    "titleLabel": "शीर्षक",
+    "descriptionLabel": "विवरण",
+    "amountLabel": "मांगी गई राशि",
+    "submit": "प्रस्ताव सबमिट करें",
+    "submitting": "सबमिट हो रहा है…",
+    "success": "प्रस्ताव सबमिट किया गया!",
+    "noVendors": "अभी तक कोई विक्रेता पंजीकृत नहीं है।"
+  },
+  "vendors": {
+    "title": "विक्रेता रजिस्ट्री",
+    "registerNew": "विक्रेता के रूप में पंजीकरण करें",
+    "empty": "अभी तक कोई विक्रेता पंजीकृत नहीं है।",
+    "verified": "सत्यापित",
+    "unverified": "असत्यापित",
+    "totalReceived": "कुल प्राप्त",
+    "proposalsFunded": "वित्तपोषित प्रस्ताव",
+    "registeredAt": "ब्लॉक {{block}} पर पंजीकृत",
+    "category": "श्रेणी",
+    "contact": "संपर्क"
+  },
+  "registerVendor": {
+    "title": "विक्रेता के रूप में पंजीकरण करें",
+    "nameLabel": "विक्रेता / व्यवसाय का नाम",
+    "categoryLabel": "श्रेणी",
+    "descriptionLabel": "दी जाने वाली सेवाओं का विवरण",
+    "contactLabel": "सार्वजनिक संपर्क (ईमेल, फ़ोन, या वेबसाइट)",
+    "emailLabel": "ईमेल पता",
+    "businessAddressLabel": "व्यवसाय का पता",
+    "websiteLabel": "वेबसाइट (वैकल्पिक)",
+    "verifyEmail": "ईमेल सत्यापित करें",
+    "emailVerified": "ईमेल सत्यापित",
+    "captchaPrompt": "यह सत्यापित करने के लिए कि आप इंसान हैं, हल करें: {{question}}",
+    "sendCode": "कोड भेजें",
+    "enterCode": "आपके ईमेल पर भेजा गया 6-अंकीय कोड दर्ज करें",
+    "devCodeNotice": "ईमेल भेजना कॉन्फ़िगर नहीं है — परीक्षण के लिए यह कोड उपयोग करें:",
+    "confirmCode": "पुष्टि करें",
+    "resendCode": "कोड पुनः भेजें",
+    "verifyEmailFirst": "पंजीकरण से पहले कृपया अपना ईमेल सत्यापित करें।",
+    "verificationFailed": "सत्यापन विफल रहा। कृपया पुनः प्रयास करें।",
+    "submit": "पंजीकरण करें",
+    "submitting": "पंजीकरण हो रहा है…",
+    "success": "अब आप एक विक्रेता के रूप में पंजीकृत हैं!"
+  },
+  "vendorCategory": {
+    "Construction": "निर्माण",
+    "ParksAndRecreation": "पार्क और मनोरंजन",
+    "ArtsAndCulture": "कला और संस्कृति",
+    "Environmental": "पर्यावरण",
+    "Housing": "आवास",
+    "Infrastructure": "बुनियादी ढांचा",
+    "Technology": "प्रौद्योगिकी",
+    "FoodAndAgriculture": "खाद्य और कृषि",
+    "YouthAndCommunity": "युवा और समुदाय",
+    "PublicSafety": "सार्वजनिक सुरक्षा",
+    "Other": "अन्य"
+  },
+  "common": {
+    "loading": "लोड हो रहा है…",
+    "error": "त्रुटि",
+    "address": "पता",
+    "close": "बंद करें",
+    "connectWalletFirst": "पहले अपना वॉलेट कनेक्ट करें।"
+  },
+  "demo": {
+    "banner": "डेमो मोड — डेट्रॉइट पुनरुद्धार का उदाहरण डेटा दिखाया जा रहा है। कोई वास्तविक चेन कनेक्शन उपयोग नहीं हो रहा।",
+    "toggleOn": "डेमो मोड: चालू",
+    "toggleOff": "डेमो मोड: बंद",
+    "reset": "डेमो डेटा रीसेट करें"
+  },
+  "charts": {
+    "noData": "चार्ट बनाने के लिए अभी पर्याप्त डेटा नहीं है।"
+  },
+  "ledger": {
+    "title": "लेनदेन खाता-बही",
+    "subtitle": "हर कोष योगदान, प्रस्ताव, और भुगतान — पूरी तरह सार्वजनिक और लेखा-परीक्षा योग्य।",
+    "block": "ब्लॉक",
+    "type": "प्रकार",
+    "description": "विवरण",
+    "amount": "राशि",
+    "party": "पक्ष",
+    "empty": "अभी तक कोई लेनदेन नहीं है।"
+  },
+  "ledgerType": {
+    "TreasuryContribution": "कोष योगदान",
+    "VendorRegistered": "विक्रेता पंजीकृत",
+    "ProposalSubmitted": "प्रस्ताव सबमिट किया गया",
+    "ProposalFunded": "प्रस्ताव वित्तपोषित",
+    "ProposalRejected": "प्रस्ताव अस्वीकृत",
+    "ProposalCancelled": "प्रस्ताव रद्द"
+  },
+  "vendorDetail": {
+    "back": "विक्रेताओं पर वापस जाएं",
+    "notFound": "विक्रेता नहीं मिला।",
+    "updatesTitle": "अपडेट",
+    "noUpdates": "अभी तक कोई अपडेट पोस्ट नहीं किया गया है।",
+    "postedAtBlock": "ब्लॉक {{block}} पर पोस्ट किया गया",
+    "relatedProposal": "संबंधित प्रस्ताव",
+    "postUpdate": "एक अपडेट पोस्ट करें",
+    "updatePlaceholder": "समुदाय के साथ वित्तपोषित कार्य की प्रगति साझा करें…",
+    "linkProposal": "किसी वित्तपोषित प्रस्ताव से लिंक करें (वैकल्पिक)",
+    "noProposalOption": "कोई विशिष्ट प्रस्ताव नहीं",
+    "post": "अपडेट पोस्ट करें",
+    "posting": "पोस्ट हो रहा है…",
+    "onlyVendorCanPost": "अपडेट पोस्ट करने के लिए इस विक्रेता के अपने वॉलेट खाते को कनेक्ट करें।",
+    "postSuccess": "अपडेट पोस्ट किया गया!"
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "app": {
+    "name": "VendorDAO",
+    "tagline": "Open, transparent citywide vendor funding — powered by Polkadot."
+  },
+  "nav": { "dashboard": "Dashboard", "proposals": "Proposals", "vendors": "Vendors", "ledger": "Ledger" },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "connecting": "Connecting…",
+    "noExtension": "No wallet extension found",
+    "selectAccount": "Account"
+  },
+  "dashboard": {
+    "subtitle": "A public, on-chain ledger of every fund raised and every proposal funded.",
+    "treasuryBalance": "Treasury Balance",
+    "totalReceived": "Total Received",
+    "totalDisbursed": "Total Disbursed",
+    "potAddress": "Treasury Account",
+    "recentProposals": "Recent Proposals",
+    "viewAll": "View all proposals",
+    "contribute": "Contribute",
+    "contributeSubmit": "Send",
+    "fundingHistory": "Funding History",
+    "categoryBreakdown": "Funding by Category"
+  },
+  "status": {
+    "Proposed": "Voting Open",
+    "Approved": "Approved",
+    "Rejected": "Rejected",
+    "Funded": "Funded",
+    "Cancelled": "Cancelled"
+  },
+  "proposals": {
+    "title": "Proposals",
+    "submitNew": "Submit a Proposal",
+    "empty": "No proposals yet. Be the first to submit one.",
+    "amountRequested": "Amount Requested",
+    "ayes": "Ayes",
+    "nays": "Nays",
+    "votingEndsAtBlock": "Voting ends at block {{block}}",
+    "viewDetails": "View details"
+  },
+  "proposalDetail": {
+    "back": "Back to proposals",
+    "proposedBy": "Proposed by",
+    "vendor": "Vendor",
+    "voteAye": "Vote Aye",
+    "voteNay": "Vote Nay",
+    "alreadyVoted": "You already voted on this proposal.",
+    "connectToVote": "Connect your wallet to vote.",
+    "closeVoting": "Tally votes",
+    "retryDisbursement": "Retry disbursement",
+    "translate": "Translate",
+    "showOriginal": "Show original",
+    "translating": "Translating…",
+    "notFound": "Proposal not found."
+  },
+  "newProposal": {
+    "title": "Submit a Proposal",
+    "vendorLabel": "Vendor",
+    "selectVendor": "Select a registered vendor",
+    "titleLabel": "Title",
+    "descriptionLabel": "Description",
+    "amountLabel": "Amount Requested",
+    "submit": "Submit Proposal",
+    "submitting": "Submitting…",
+    "success": "Proposal submitted!",
+    "noVendors": "No vendors are registered yet."
+  },
+  "vendors": {
+    "title": "Vendor Registry",
+    "registerNew": "Register as Vendor",
+    "empty": "No vendors registered yet.",
+    "verified": "Verified",
+    "unverified": "Unverified",
+    "totalReceived": "Total Received",
+    "proposalsFunded": "Proposals Funded",
+    "registeredAt": "Registered at block {{block}}",
+    "category": "Category",
+    "contact": "Contact"
+  },
+  "registerVendor": {
+    "title": "Register as Vendor",
+    "nameLabel": "Vendor / Business Name",
+    "categoryLabel": "Category",
+    "descriptionLabel": "Description of services offered",
+    "contactLabel": "Public contact (email, phone, or website)",
+    "emailLabel": "Email Address",
+    "businessAddressLabel": "Business Address",
+    "websiteLabel": "Website (optional)",
+    "verifyEmail": "Verify Email",
+    "emailVerified": "Email verified",
+    "captchaPrompt": "To verify you're human, solve: {{question}}",
+    "sendCode": "Send Code",
+    "enterCode": "Enter the 6-digit code sent to your email",
+    "devCodeNotice": "Email sending isn't configured — using this code for testing:",
+    "confirmCode": "Confirm",
+    "resendCode": "Resend code",
+    "verifyEmailFirst": "Please verify your email before registering.",
+    "verificationFailed": "Verification failed. Please try again.",
+    "submit": "Register",
+    "submitting": "Registering…",
+    "success": "You are now registered as a vendor!"
+  },
+  "vendorCategory": {
+    "Construction": "Construction",
+    "ParksAndRecreation": "Parks & Recreation",
+    "ArtsAndCulture": "Arts & Culture",
+    "Environmental": "Environmental",
+    "Housing": "Housing",
+    "Infrastructure": "Infrastructure",
+    "Technology": "Technology",
+    "FoodAndAgriculture": "Food & Agriculture",
+    "YouthAndCommunity": "Youth & Community",
+    "PublicSafety": "Public Safety",
+    "Other": "Other"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Error",
+    "address": "Address",
+    "close": "Close",
+    "connectWalletFirst": "Connect your wallet first."
+  },
+  "demo": {
+    "banner": "Demo Mode — showing example Detroit revitalization data. No live chain connection is used.",
+    "toggleOn": "Demo Mode: On",
+    "toggleOff": "Demo Mode: Off",
+    "reset": "Reset demo data"
+  },
+  "charts": {
+    "noData": "Not enough data yet to draw a chart."
+  },
+  "ledger": {
+    "title": "Transaction Ledger",
+    "subtitle": "Every treasury contribution, proposal, and disbursement — fully public and auditable.",
+    "block": "Block",
+    "type": "Type",
+    "description": "Description",
+    "amount": "Amount",
+    "party": "Party",
+    "empty": "No transactions yet."
+  },
+  "ledgerType": {
+    "TreasuryContribution": "Treasury Contribution",
+    "VendorRegistered": "Vendor Registered",
+    "ProposalSubmitted": "Proposal Submitted",
+    "ProposalFunded": "Proposal Funded",
+    "ProposalRejected": "Proposal Rejected",
+    "ProposalCancelled": "Proposal Cancelled"
+  },
+  "vendorDetail": {
+    "back": "Back to vendors",
+    "notFound": "Vendor not found.",
+    "updatesTitle": "Updates",
+    "noUpdates": "No updates posted yet.",
+    "postedAtBlock": "Posted at block {{block}}",
+    "relatedProposal": "Related proposal",
+    "postUpdate": "Post an Update",
+    "updatePlaceholder": "Share progress on funded work with the community…",
+    "linkProposal": "Link to a funded proposal (optional)",
+    "noProposalOption": "No specific proposal",
+    "post": "Post Update",
+    "posting": "Posting…",
+    "onlyVendorCanPost": "Connect this vendor's own wallet account to post updates.",
+    "postSuccess": "Update posted!"
+  }
+}

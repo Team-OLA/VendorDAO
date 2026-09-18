@@ -1,0 +1,18 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+
+# In case tooling is ever run from the repo root instead of chain/ or frontend/
+/target/
+/node_modules/
+/.next/
+
+# Local Python virtualenvs (not used by chain/ or frontend/ themselves)
+.venv/
+venv/
+
+# Env files (secrets) — never commit real values, only *.example templates
+.env
+.env.local
+.env.*.local
