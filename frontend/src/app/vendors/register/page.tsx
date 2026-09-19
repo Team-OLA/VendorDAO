@@ -9,6 +9,7 @@ import { useDemoMode } from "@/lib/demo/DemoModeContext";
 import { signAndSendTx } from "@/lib/signAndSend";
 import { VENDOR_CATEGORIES, type VendorCategory } from "@/lib/vendorCategories";
 import { EmailVerification } from "@/components/EmailVerification";
+import { Button } from "@/components/ui/Button";
 
 export default function RegisterVendorPage() {
   const { t } = useTranslation();
@@ -73,18 +74,14 @@ export default function RegisterVendorPage() {
       <h1 className="text-2xl font-semibold">{t("registerVendor.title")}</h1>
 
       {accounts.length === 0 && (
-        <button
-          type="button"
-          onClick={connect}
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500"
-        >
+        <Button type="button" onClick={connect}>
           {t("wallet.connect")}
-        </button>
+        </Button>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-white/80">
+          <label className="block text-sm font-medium text-gray-700">
             {t("registerVendor.nameLabel")}
           </label>
           <input
@@ -92,18 +89,18 @@ export default function RegisterVendorPage() {
             onChange={(event) => setName(event.target.value)}
             required
             maxLength={128}
-            className="mt-1 w-full rounded-md border border-white/20 bg-transparent px-3 py-2"
+            className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white/80">
+          <label className="block text-sm font-medium text-gray-700">
             {t("registerVendor.categoryLabel")}
           </label>
           <select
             value={category}
             onChange={(event) => setCategory(event.target.value as VendorCategory)}
-            className="mt-1 w-full rounded-md border border-white/20 bg-transparent px-3 py-2"
+            className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2"
           >
             {VENDOR_CATEGORIES.map((c) => (
               <option key={c} value={c} className="text-black">
@@ -114,7 +111,7 @@ export default function RegisterVendorPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white/80">
+          <label className="block text-sm font-medium text-gray-700">
             {t("registerVendor.descriptionLabel")}
           </label>
           <textarea
@@ -123,12 +120,12 @@ export default function RegisterVendorPage() {
             required
             rows={4}
             maxLength={1024}
-            className="mt-1 w-full rounded-md border border-white/20 bg-transparent px-3 py-2"
+            className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white/80">
+          <label className="block text-sm font-medium text-gray-700">
             {t("registerVendor.businessAddressLabel")}
           </label>
           <input
@@ -137,12 +134,12 @@ export default function RegisterVendorPage() {
             required
             maxLength={256}
             placeholder="123 Main St, Detroit, MI 48201"
-            className="mt-1 w-full rounded-md border border-white/20 bg-transparent px-3 py-2"
+            className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white/80">
+          <label className="block text-sm font-medium text-gray-700">
             {t("registerVendor.websiteLabel")}
           </label>
           <input
@@ -150,12 +147,12 @@ export default function RegisterVendorPage() {
             onChange={(event) => setWebsite(event.target.value)}
             maxLength={256}
             placeholder="https://example.com"
-            className="mt-1 w-full rounded-md border border-white/20 bg-transparent px-3 py-2"
+            className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white/80">
+          <label className="block text-sm font-medium text-gray-700">
             {t("registerVendor.emailLabel")}
           </label>
           <input
@@ -165,7 +162,7 @@ export default function RegisterVendorPage() {
             required
             maxLength={256}
             placeholder="hello@example.com"
-            className="mt-1 w-full rounded-md border border-white/20 bg-transparent px-3 py-2"
+            className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2"
           />
           <div className="mt-2">
             <EmailVerification
@@ -176,16 +173,12 @@ export default function RegisterVendorPage() {
           </div>
         </div>
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
-        {status && !error && <p className="text-sm text-white/60">{status}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
+        {status && !error && <p className="text-sm text-gray-500">{status}</p>}
 
-        <button
-          type="submit"
-          disabled={submitting || (!demo.enabled && !api) || !emailVerified}
-          className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-60"
-        >
+        <Button type="submit" disabled={submitting || (!demo.enabled && !api) || !emailVerified}>
           {submitting ? t("registerVendor.submitting") : t("registerVendor.submit")}
-        </button>
+        </Button>
       </form>
     </div>
   );

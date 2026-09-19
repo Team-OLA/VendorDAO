@@ -3,7 +3,18 @@
     "name": "VendorDAO",
     "tagline": "Open, transparent citywide vendor funding — powered by Polkadot."
   },
-  "nav": { "dashboard": "Dashboard", "proposals": "Proposals", "vendors": "Vendors", "ledger": "Ledger" },
+  "nav": {
+    "dashboard": "Dashboard",
+    "proposals": "Proposals",
+    "rfps": "RFPs",
+    "vendors": "Vendors",
+    "donors": "Donors",
+    "map": "Map",
+    "stake": "Stake",
+    "kyc": "KYC",
+    "ledger": "Ledger",
+    "menu": "Menu"
+  },
   "wallet": {
     "connect": "Connect Wallet",
     "connecting": "Connecting…",
@@ -24,11 +35,13 @@
     "categoryBreakdown": "Funding by Category"
   },
   "status": {
+    "PendingReview": "Pending Review",
     "Proposed": "Voting Open",
     "Approved": "Approved",
     "Rejected": "Rejected",
     "Funded": "Funded",
-    "Cancelled": "Cancelled"
+    "Cancelled": "Cancelled",
+    "Vetoed": "Vetoed"
   },
   "proposals": {
     "title": "Proposals",
@@ -50,10 +63,32 @@
     "connectToVote": "Connect your wallet to vote.",
     "closeVoting": "Tally votes",
     "retryDisbursement": "Retry disbursement",
+    "vetApprove": "Approve for voting",
+    "vetVeto": "Veto proposal",
+    "pendingReviewNotice": "This proposal is awaiting admin review before it opens for a community vote.",
+    "vetoedNotice": "This proposal was vetoed by an administrator and never opened for a vote.",
+    "respondingToRfp": "Responding to RFP",
+    "wardRestrictedNotice": "Voting on this proposal is restricted to verified {{ward}} residents. Get verified on",
     "translate": "Translate",
     "showOriginal": "Show original",
     "translating": "Translating…",
-    "notFound": "Proposal not found."
+    "notFound": "Proposal not found.",
+    "fundsBreakdown": "Funds Breakdown",
+    "receiptedOfDisbursed": "{{receipted}} of {{disbursed}} {{symbol}} receipted",
+    "remainingToReceipt": "{{amount}} {{symbol}} remaining to receipt",
+    "noReceipts": "No spending has been receipted yet.",
+    "postReceipt": "Post a Spending Receipt",
+    "postingReceipt": "Posting…",
+    "receiptCategoryLabel": "Category",
+    "receiptAmountLabel": "Amount",
+    "receiptDescriptionLabel": "What was this spent on?",
+    "receiptExceedsRemaining": "This amount exceeds what's left to receipt for this proposal.",
+    "receiptAttachmentLabel": "Attach a receipt photo or PDF (optional)",
+    "attachmentHint": "Only a cryptographic hash of this file is submitted on-chain; the file itself is kept in your browser only.",
+    "attachmentTooLarge": "That file is too large to attach (2 MB max).",
+    "receiptAttachmentAlt": "Receipt attachment preview",
+    "viewAttachment": "View attachment",
+    "attachmentOnFile": "Attachment on file (hash {{hash}}…) — not available for preview on this device"
   },
   "newProposal": {
     "title": "Submit a Proposal",
@@ -61,6 +96,10 @@
     "selectVendor": "Select a registered vendor",
     "titleLabel": "Title",
     "descriptionLabel": "Description",
+    "wardLabel": "Neighborhood / Ward",
+    "wardHint": "Choose \"Citywide\" if this proposal isn't specific to one district — citywide proposals are open to every voter.",
+    "respondingToRfp": "Responding to RFP: {{title}}.",
+    "rfpMaxAmount": "Maximum amount: {{amount}} {{symbol}}.",
     "amountLabel": "Amount Requested",
     "submit": "Submit Proposal",
     "submitting": "Submitting…",
@@ -139,7 +178,12 @@
     "description": "Description",
     "amount": "Amount",
     "party": "Party",
-    "empty": "No transactions yet."
+    "empty": "No transactions yet.",
+    "spendingBreakdown": "Where the Money Went",
+    "byWard": "Disbursed by Neighborhood/Ward",
+    "byCategory": "Disbursed by Vendor Category",
+    "topVendors": "Top Funded Vendors",
+    "noSpending": "No funds have been disbursed yet."
   },
   "ledgerType": {
     "TreasuryContribution": "Treasury Contribution",
@@ -147,7 +191,10 @@
     "ProposalSubmitted": "Proposal Submitted",
     "ProposalFunded": "Proposal Funded",
     "ProposalRejected": "Proposal Rejected",
-    "ProposalCancelled": "Proposal Cancelled"
+    "ProposalCancelled": "Proposal Cancelled",
+    "DonorRegistered": "Donor Registered",
+    "GrantSubmitted": "Grant Submitted",
+    "TokensStaked": "Tokens Staked"
   },
   "vendorDetail": {
     "back": "Back to vendors",
@@ -164,5 +211,137 @@
     "posting": "Posting…",
     "onlyVendorCanPost": "Connect this vendor's own wallet account to post updates.",
     "postSuccess": "Update posted!"
+  },
+  "donorType": {
+    "Individual": "Individual",
+    "Foundation": "Foundation",
+    "Corporation": "Corporation",
+    "Government": "Government",
+    "Other": "Other"
+  },
+  "registerDonor": {
+    "title": "Register as Donor",
+    "nameLabel": "Donor / Organization Name",
+    "typeLabel": "Donor Type",
+    "submit": "Register",
+    "submitting": "Registering\u2026"
+  },
+  "donors": {
+    "title": "Donor & Grants Registry",
+    "subtitle": "Every registered donor and named grant to the public treasury \u2014 fully public and auditable.",
+    "registerNew": "Register as Donor",
+    "empty": "No donors registered yet.",
+    "totalContributed": "Total Contributed",
+    "grantsMade": "Grants Made",
+    "submitGrant": "Submit a Grant",
+    "submittingGrant": "Submitting\u2026",
+    "grantAmountLabel": "Grant Amount",
+    "grantPurposeLabel": "Purpose",
+    "recentGrants": "Recent Grants",
+    "noGrants": "No grants submitted yet."
+  },
+  "stake": {
+    "title": "Stake VDAO",
+    "subtitle": "Buy VDAO with a card via Stripe \u2014 $1 = 1 VDAO.",
+    "currentBalance": "Current Balance",
+    "amountLabel": "Amount (USD)",
+    "rateNote": "You'll receive {{amount}} VDAO.",
+    "payWithStripe": "Pay with Stripe",
+    "processing": "Processing\u2026",
+    "notConfiguredNotice": "Stripe isn't configured on this server yet. See STRIPE_SECRET_KEY in .env.local.example.",
+    "success": "Payment successful! Your VDAO will be credited shortly.",
+    "canceled": "Payment canceled."
+  },
+  "map": {
+    "title": "Civic Map",
+    "subtitle": "Vendors, funded projects, and open RFPs across Detroit, powered by Google Maps.",
+    "unavailable": "Google Maps isn't configured on this server. Showing plain links instead:",
+    "layerVendors": "Vendors",
+    "layerProjects": "Funded Projects",
+    "layerRfps": "Open RFPs",
+    "categoryFilter": "Category",
+    "wardFilter": "Ward",
+    "allCategories": "All",
+    "allWards": "All",
+    "legendTitle": "Legend",
+    "legendVendor": "Vendor",
+    "legendProject": "Funded Project",
+    "legendRfp": "Open RFP",
+    "viewVendor": "View vendor",
+    "viewProject": "View project",
+    "viewRfp": "View RFP"
+  },
+  "ward": {
+    "District1": "District 1",
+    "District2": "District 2",
+    "District3": "District 3",
+    "District4": "District 4",
+    "District5": "District 5",
+    "District6": "District 6",
+    "District7": "District 7",
+    "Citywide": "Citywide"
+  },
+  "rfpStatus": {
+    "Open": "Open",
+    "Closed": "Closed"
+  },
+  "documentType": {
+    "Passport": "Passport",
+    "DriversLicense": "Driver's License",
+    "StateId": "State ID",
+    "NationalId": "National ID"
+  },
+  "rfps": {
+    "title": "Requests for Proposals",
+    "subtitle": "Civic needs the city has posted for vendors to respond to, organized by neighborhood/ward.",
+    "postNew": "Post a New RFP",
+    "empty": "No RFPs posted yet.",
+    "maxAmount": "Max Amount",
+    "respond": "Respond with a Proposal",
+    "close": "Close RFP",
+    "titleLabel": "Title",
+    "descriptionLabel": "Description",
+    "wardLabel": "Neighborhood / Ward",
+    "maxAmountLabel": "Max Amount",
+    "submit": "Post RFP",
+    "submitting": "Posting…",
+    "notFound": "RFP not found.",
+    "back": "Back to RFPs",
+    "responses": "Proposal Responses",
+    "noResponses": "No proposals have responded to this RFP yet."
+  },
+  "kyc": {
+    "title": "Resident Verification (KYC)",
+    "subtitle": "Verify your identity and declare your neighborhood/ward to vote on ward-scoped proposals.",
+    "statusLabel": "Status",
+    "status": {
+      "NotStarted": "Not Started",
+      "Pending": "Pending Review",
+      "Verified": "Verified",
+      "Rejected": "Rejected",
+      "Expired": "Expired"
+    },
+    "documentTypeLabel": "ID Document Type",
+    "fullNameLabel": "Full Legal Name",
+    "dobLabel": "Date of Birth",
+    "documentNumberLabel": "ID Document Number",
+    "privacyNotice": "Your name, date of birth, and document number are hashed on your device and never sent to or stored by VendorDAO — only a one-way cryptographic hash is submitted on-chain.",
+    "validUntilBlock": "Valid until block {{block}}",
+    "expiredAtBlock": "Expired at block {{block}} — please re-verify",
+    "rejectionReasonLabel": "Reason",
+    "rejectReasonPlaceholder": "Reason for rejection (optional)",
+    "wardLabel": "Neighborhood / Ward",
+    "wardHint": "This is locked in once the city verifies your request, so ward-scoped votes stay tied to real residents.",
+    "verifyWithStripe": "Verify Identity with Stripe",
+    "verifying": "Verifying…",
+    "stripeNotConfiguredNotice": "Identity verification isn't configured on this server yet, so this request will be reviewed as a self-declared ward. See NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY in .env.local.example.",
+    "stripeVerifiedNotice": "Identity verified with Stripe.",
+    "submit": "Submit for City Review",
+    "submitting": "Submitting…",
+    "pendingNotice": "Your request is awaiting city review.",
+    "adminPendingTitle": "Pending KYC Requests",
+    "adminEmpty": "No pending KYC requests.",
+    "approve": "Approve",
+    "reject": "Reject"
   }
 }

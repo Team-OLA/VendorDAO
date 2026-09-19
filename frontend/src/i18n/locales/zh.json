@@ -3,7 +3,7 @@
     "name": "VendorDAO",
     "tagline": "由 Polkadot 提供支持的、开放透明的全市供应商资助平台。"
   },
-  "nav": { "dashboard": "仪表盘", "proposals": "提案", "vendors": "供应商", "ledger": "账本" },
+  "nav": { "dashboard": "仪表盘", "proposals": "提案", "rfps": "招标", "vendors": "供应商", "donors": "捐赠者", "map": "地图", "stake": "质押", "kyc": "身份认证", "ledger": "账本", "menu": "菜单" },
   "wallet": {
     "connect": "连接钱包",
     "connecting": "连接中…",
@@ -24,11 +24,13 @@
     "categoryBreakdown": "按类别划分的资助"
   },
   "status": {
+    "PendingReview": "待审核",
     "Proposed": "投票中",
     "Approved": "已批准",
     "Rejected": "已否决",
     "Funded": "已拨款",
-    "Cancelled": "已取消"
+    "Cancelled": "已取消",
+    "Vetoed": "已否决"
   },
   "proposals": {
     "title": "提案",
@@ -50,10 +52,32 @@
     "connectToVote": "请先连接钱包以投票。",
     "closeVoting": "统计票数",
     "retryDisbursement": "重试拨款",
+    "vetApprove": "批准进入投票",
+    "vetVeto": "否决提案",
+    "pendingReviewNotice": "该提案正等待管理员审核,审核通过后才会开放社区投票。",
+    "vetoedNotice": "该提案已被管理员否决,未开放投票。",
+    "respondingToRfp": "响应征集提案",
+    "wardRestrictedNotice": "该提案的投票仅限于 {{ward}} 的已验证居民。请前往以下页面完成验证：",
     "translate": "翻译",
     "showOriginal": "显示原文",
     "translating": "翻译中…",
-    "notFound": "未找到该提案。"
+    "notFound": "未找到该提案。",
+    "fundsBreakdown": "资金明细",
+    "receiptedOfDisbursed": "已登记 {{receipted}} / {{disbursed}} {{symbol}}",
+    "remainingToReceipt": "剩余 {{amount}} {{symbol}} 待登记",
+    "noReceipts": "尚未登记任何支出。",
+    "postReceipt": "登记支出凭证",
+    "postingReceipt": "提交中…",
+    "receiptCategoryLabel": "类别",
+    "receiptAmountLabel": "金额",
+    "receiptDescriptionLabel": "这笔支出用于何处？",
+    "receiptExceedsRemaining": "此金额超过该提案剩余可登记的金额。",
+    "receiptAttachmentLabel": "上传收据照片或 PDF（可选）",
+    "attachmentHint": "链上仅提交此文件的加密哈希值；文件本身仅保存在您的浏览器中。",
+    "attachmentTooLarge": "文件过大，无法上传（最大 2MB）。",
+    "receiptAttachmentAlt": "收据附件预览",
+    "viewAttachment": "查看附件",
+    "attachmentOnFile": "已登记附件（哈希值 {{hash}}…）—— 此设备无法预览"
   },
   "newProposal": {
     "title": "提交提案",
@@ -61,6 +85,10 @@
     "selectVendor": "选择一个已注册的供应商",
     "titleLabel": "标题",
     "descriptionLabel": "描述",
+    "wardLabel": "社区/选区",
+    "wardHint": "如果此提案不针对特定选区,请选择“全市”——全市性提案对所有投票者开放。",
+    "respondingToRfp": "正在响应征集提案：{{title}}。",
+    "rfpMaxAmount": "最高金额：{{amount}} {{symbol}}。",
     "amountLabel": "申请金额",
     "submit": "提交提案",
     "submitting": "提交中…",
@@ -139,7 +167,12 @@
     "description": "描述",
     "amount": "金额",
     "party": "相关方",
-    "empty": "暂无交易记录。"
+    "empty": "暂无交易记录。",
+    "spendingBreakdown": "资金去向",
+    "byWard": "按社区/选区拨款",
+    "byCategory": "按供应商类别拨款",
+    "topVendors": "获资最多的供应商",
+    "noSpending": "尚未拨付任何资金。"
   },
   "ledgerType": {
     "TreasuryContribution": "国库捐款",
@@ -147,7 +180,10 @@
     "ProposalSubmitted": "提案提交",
     "ProposalFunded": "提案已拨款",
     "ProposalRejected": "提案已否决",
-    "ProposalCancelled": "提案已取消"
+    "ProposalCancelled": "提案已取消",
+    "DonorRegistered": "捐赠者已注册",
+    "GrantSubmitted": "拨款已提交",
+    "TokensStaked": "代币已质押"
   },
   "vendorDetail": {
     "back": "返回供应商列表",
@@ -164,5 +200,137 @@
     "posting": "发布中…",
     "onlyVendorCanPost": "请连接该供应商自己的钱包账户以发布更新。",
     "postSuccess": "更新已发布!"
+  },
+  "donorType": {
+    "Individual": "个人",
+    "Foundation": "基金会",
+    "Corporation": "企业",
+    "Government": "政府",
+    "Other": "其他"
+  },
+  "registerDonor": {
+    "title": "注册为捐赠者",
+    "nameLabel": "捐赠者/组织名称",
+    "typeLabel": "捐赠者类型",
+    "submit": "注册",
+    "submitting": "注册中\u2026"
+  },
+  "donors": {
+    "title": "捐赠者与拨款登记",
+    "subtitle": "每一位注册捐赠者和每一笔具名拨款进入公共国库 — 完全公开且可审计。",
+    "registerNew": "注册为捐赠者",
+    "empty": "尚无注册捐赠者。",
+    "totalContributed": "累计捐赠",
+    "grantsMade": "已提交拨款数",
+    "submitGrant": "提交拨款",
+    "submittingGrant": "提交中\u2026",
+    "grantAmountLabel": "拨款金额",
+    "grantPurposeLabel": "用途",
+    "recentGrants": "最新拨款",
+    "noGrants": "尚未提交任何拨款。"
+  },
+  "stake": {
+    "title": "质押 VDAO",
+    "subtitle": "通过 Stripe 用银行卡购买 VDAO — 1 美元 = 1 VDAO。",
+    "currentBalance": "当前余额",
+    "amountLabel": "金额（美元）",
+    "rateNote": "您将获得 {{amount}} VDAO。",
+    "payWithStripe": "使用 Stripe 支付",
+    "processing": "处理中\u2026",
+    "notConfiguredNotice": "此服务器尚未配置 Stripe。请参阅 .env.local.example 中的 STRIPE_SECRET_KEY。",
+    "success": "支付成功！您的 VDAO 将很快到账。",
+    "canceled": "支付已取消。"
+  },
+  "map": {
+    "title": "城市地图",
+    "subtitle": "底特律各地的供应商、已资助项目和公开招标，由 Google 地图提供支持。",
+    "unavailable": "此服务器尚未配置 Google 地图。改为显示纯文本链接：",
+    "layerVendors": "供应商",
+    "layerProjects": "已资助项目",
+    "layerRfps": "公开招标",
+    "categoryFilter": "类别",
+    "wardFilter": "区",
+    "allCategories": "全部",
+    "allWards": "全部",
+    "legendTitle": "图例",
+    "legendVendor": "供应商",
+    "legendProject": "已资助项目",
+    "legendRfp": "公开招标",
+    "viewVendor": "查看供应商",
+    "viewProject": "查看项目",
+    "viewRfp": "查看招标"
+  },
+  "ward": {
+    "District1": "1区",
+    "District2": "2区",
+    "District3": "3区",
+    "District4": "4区",
+    "District5": "5区",
+    "District6": "6区",
+    "District7": "7区",
+    "Citywide": "全市"
+  },
+  "rfpStatus": {
+    "Open": "开放",
+    "Closed": "已关闭"
+  },
+  "documentType": {
+    "Passport": "护照",
+    "DriversLicense": "驾照",
+    "StateId": "州身份证",
+    "NationalId": "国民身份证"
+  },
+  "rfps": {
+    "title": "征集提案 (RFP)",
+    "subtitle": "市政府发布的、供应商可响应的民生需求，按社区/选区分类。",
+    "postNew": "发布新的征集提案",
+    "empty": "尚未发布任何征集提案。",
+    "maxAmount": "最高金额",
+    "respond": "提交响应提案",
+    "close": "关闭征集",
+    "titleLabel": "标题",
+    "descriptionLabel": "描述",
+    "wardLabel": "社区/选区",
+    "maxAmountLabel": "最高金额",
+    "submit": "发布征集",
+    "submitting": "发布中…",
+    "notFound": "未找到该征集提案。",
+    "back": "返回征集提案列表",
+    "responses": "响应提案",
+    "noResponses": "尚无提案响应此征集。"
+  },
+  "kyc": {
+    "title": "居民身份验证 (KYC)",
+    "subtitle": "验证您的身份并声明您的社区/选区，以便对特定选区的提案进行投票。",
+    "statusLabel": "状态",
+    "status": {
+      "NotStarted": "未开始",
+      "Pending": "审核中",
+      "Verified": "已验证",
+      "Rejected": "已拒绝",
+      "Expired": "已过期"
+    },
+    "documentTypeLabel": "证件类型",
+    "fullNameLabel": "法定全名",
+    "dobLabel": "出生日期",
+    "documentNumberLabel": "证件号码",
+    "privacyNotice": "您的姓名、出生日期和证件号码会在您的设备上进行哈希处理，绝不会发送给或存储在 VendorDAO —— 链上仅提交一个单向加密哈希值。",
+    "validUntilBlock": "有效期至区块 {{block}}",
+    "expiredAtBlock": "已于区块 {{block}} 过期——请重新验证",
+    "rejectionReasonLabel": "原因",
+    "rejectReasonPlaceholder": "拒绝原因（可选）",
+    "wardLabel": "社区/选区",
+    "wardHint": "一旦市政府验证您的申请，该信息将被锁定，以确保选区投票始终与真实居民相关联。",
+    "verifyWithStripe": "通过 Stripe 验证身份",
+    "verifying": "验证中…",
+    "stripeNotConfiguredNotice": "此服务器尚未配置身份验证，因此该申请将作为自我声明的选区进行审核。请参阅 .env.local.example 中的 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY。",
+    "stripeVerifiedNotice": "已通过 Stripe 验证身份。",
+    "submit": "提交市政审核",
+    "submitting": "提交中…",
+    "pendingNotice": "您的申请正在等待市政审核。",
+    "adminPendingTitle": "待处理的 KYC 申请",
+    "adminEmpty": "没有待处理的 KYC 申请。",
+    "approve": "批准",
+    "reject": "拒绝"
   }
 }

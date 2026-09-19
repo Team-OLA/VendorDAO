@@ -11,8 +11,10 @@
   "dependencies": {
     "@polkadot/api": "^16.5.6",
     "@polkadot/extension-dapp": "^0.63.1",
+    "@polkadot/keyring": "^14.0.3",
     "@polkadot/util": "^14.0.3",
     "@polkadot/util-crypto": "^14.0.3",
+    "@stripe/stripe-js": "^9.16.0",
     "i18next": "^26.4.2",
     "i18next-browser-languagedetector": "^8.2.1",
     "next": "16.3.5",
@@ -20,7 +22,8 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-i18next": "^17.0.14",
-    "recharts": "^3.10.1"
+    "recharts": "^3.10.1",
+    "stripe": "^22.6.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

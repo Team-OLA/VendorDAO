@@ -3,7 +3,7 @@
 import { useTranslation } from "react-i18next";
 import { useDemoMode } from "@/lib/demo/DemoModeContext";
 
-export function DemoModeToggle() {
+export function DemoModeToggle({ className = "" }: { className?: string }) {
   const { t } = useTranslation();
   const demo = useDemoMode();
 
@@ -12,11 +12,9 @@ export function DemoModeToggle() {
       type="button"
       onClick={demo.toggle}
       title={t("demo.banner")}
-      className={`rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
-        demo.enabled
-          ? "bg-amber-500/15 text-amber-300 ring-amber-500/30"
-          : "bg-white/5 text-white/60 ring-white/15"
-      }`}
+      className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
+        demo.enabled ? "bg-[#FFC709] text-[#0b1333] hover:bg-[#e6b408]" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+      } ${className}`}
     >
       {demo.enabled ? `🎭 ${t("demo.toggleOn")}` : t("demo.toggleOff")}
     </button>

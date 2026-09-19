@@ -3,7 +3,7 @@
     "name": "VendorDAO",
     "tagline": "تمويل مزوّدي الخدمات على مستوى المدينة، بشكل مفتوح وشفاف، مدعوم بتقنية بولكادوت."
   },
-  "nav": { "dashboard": "لوحة التحكم", "proposals": "المقترحات", "vendors": "المزوّدون", "ledger": "السجل" },
+  "nav": { "dashboard": "لوحة التحكم", "proposals": "المقترحات", "rfps": "طلبات العروض", "vendors": "المزوّدون", "donors": "المتبرعون", "map": "الخريطة", "stake": "المساهمة", "kyc": "التحقق من الهوية", "ledger": "السجل", "menu": "القائمة" },
   "wallet": {
     "connect": "ربط المحفظة",
     "connecting": "جارٍ الاتصال…",
@@ -24,11 +24,13 @@
     "categoryBreakdown": "التمويل حسب الفئة"
   },
   "status": {
+    "PendingReview": "قيد المراجعة",
     "Proposed": "التصويت مفتوح",
     "Approved": "تمت الموافقة",
     "Rejected": "مرفوض",
     "Funded": "تم التمويل",
-    "Cancelled": "ملغى"
+    "Cancelled": "ملغى",
+    "Vetoed": "مرفوض إداريًا"
   },
   "proposals": {
     "title": "المقترحات",
@@ -50,10 +52,32 @@
     "connectToVote": "اربط محفظتك للتصويت.",
     "closeVoting": "احتساب الأصوات",
     "retryDisbursement": "إعادة محاولة الصرف",
+    "vetApprove": "الموافقة لفتح التصويت",
+    "vetVeto": "رفض المقترح",
+    "pendingReviewNotice": "هذا المقترح في انتظار مراجعة إدارية قبل فتحه للتصويت المجتمعي.",
+    "vetoedNotice": "تم رفض هذا المقترح من قِبل أحد المسؤولين ولم يُفتح للتصويت.",
+    "respondingToRfp": "استجابة لطلب العروض",
+    "wardRestrictedNotice": "التصويت على هذا المقترح مقتصر على المقيمين الموثّقين في {{ward}}. تحقق من هويتك عبر",
     "translate": "ترجمة",
     "showOriginal": "عرض النص الأصلي",
     "translating": "جارٍ الترجمة…",
-    "notFound": "المقترح غير موجود."
+    "notFound": "المقترح غير موجود.",
+    "fundsBreakdown": "تفصيل الأموال",
+    "receiptedOfDisbursed": "تم توثيق {{receipted}} من {{disbursed}} {{symbol}}",
+    "remainingToReceipt": "متبقٍّ {{amount}} {{symbol}} لتوثيقه",
+    "noReceipts": "لم يتم توثيق أي إنفاق بعد.",
+    "postReceipt": "نشر إيصال إنفاق",
+    "postingReceipt": "جارٍ النشر…",
+    "receiptCategoryLabel": "الفئة",
+    "receiptAmountLabel": "المبلغ",
+    "receiptDescriptionLabel": "فيم أُنفق هذا المبلغ؟",
+    "receiptExceedsRemaining": "يتجاوز هذا المبلغ ما تبقى توثيقه لهذا المقترح.",
+    "receiptAttachmentLabel": "إرفاق صورة الإيصال أو ملف PDF (اختياري)",
+    "attachmentHint": "يُرسل فقط بصمة تشفير لهذا الملف إلى السلسلة، أما الملف نفسه فيبقى في متصفحك فقط.",
+    "attachmentTooLarge": "هذا الملف كبير جداً لإرفاقه (بحد أقصى 2 ميغابايت).",
+    "receiptAttachmentAlt": "معاينة المرفق المرفق",
+    "viewAttachment": "عرض المرفق",
+    "attachmentOnFile": "مرفق مسجل (البصمة {{hash}}…) — غير متاح للمعاينة على هذا الجهاز"
   },
   "newProposal": {
     "title": "إرسال مقترح",
@@ -61,6 +85,10 @@
     "selectVendor": "اختر مزوّدًا مسجلاً",
     "titleLabel": "العنوان",
     "descriptionLabel": "الوصف",
+    "wardLabel": "الحي / المنطقة",
+    "wardHint": "اختر \"على مستوى المدينة\" إذا لم يكن هذا المقترح خاصًا بمنطقة واحدة — المقترحات على مستوى المدينة مفتوحة لجميع الناخبين.",
+    "respondingToRfp": "استجابة لطلب العروض: {{title}}.",
+    "rfpMaxAmount": "الحد الأقصى للمبلغ: {{amount}} {{symbol}}.",
     "amountLabel": "المبلغ المطلوب",
     "submit": "إرسال المقترح",
     "submitting": "جارٍ الإرسال…",
@@ -139,7 +167,12 @@
     "description": "الوصف",
     "amount": "المبلغ",
     "party": "الطرف",
-    "empty": "لا توجد معاملات بعد."
+    "empty": "لا توجد معاملات بعد.",
+    "spendingBreakdown": "إلى أين ذهبت الأموال",
+    "byWard": "المصروف حسب الحي/الدائرة",
+    "byCategory": "المصروف حسب فئة المورد",
+    "topVendors": "الموردون الأكثر تمويلاً",
+    "noSpending": "لم يتم صرف أي أموال بعد."
   },
   "ledgerType": {
     "TreasuryContribution": "مساهمة في الخزينة",
@@ -147,7 +180,10 @@
     "ProposalSubmitted": "تقديم مقترح",
     "ProposalFunded": "تمويل مقترح",
     "ProposalRejected": "رفض مقترح",
-    "ProposalCancelled": "إلغاء مقترح"
+    "ProposalCancelled": "إلغاء مقترح",
+    "DonorRegistered": "تسجيل متبرع",
+    "GrantSubmitted": "تقديم منحة",
+    "TokensStaked": "رموز مُساهَم بها"
   },
   "vendorDetail": {
     "back": "العودة إلى المزوّدين",
@@ -164,5 +200,137 @@
     "posting": "جارٍ النشر…",
     "onlyVendorCanPost": "قم بتوصيل محفظة هذا المزوّد نفسه لنشر التحديثات.",
     "postSuccess": "تم نشر التحديث!"
+  },
+  "donorType": {
+    "Individual": "فرد",
+    "Foundation": "مؤسسة",
+    "Corporation": "شركة",
+    "Government": "جهة حكومية",
+    "Other": "أخرى"
+  },
+  "registerDonor": {
+    "title": "التسجيل كمتبرع",
+    "nameLabel": "اسم المتبرع / المؤسسة",
+    "typeLabel": "نوع المتبرع",
+    "submit": "تسجيل",
+    "submitting": "جارٍ التسجيل\u2026"
+  },
+  "donors": {
+    "title": "سجل المتبرعين والمنح",
+    "subtitle": "كل متبرع مسجل وكل منحة مسمّاة إلى الخزينة العامة — علنية بالكامل وقابلة للتدقيق.",
+    "registerNew": "التسجيل كمتبرع",
+    "empty": "لا يوجد متبرعون مسجلون بعد.",
+    "totalContributed": "إجمالي المساهمات",
+    "grantsMade": "المنح المقدّمة",
+    "submitGrant": "تقديم منحة",
+    "submittingGrant": "جارٍ التقديم\u2026",
+    "grantAmountLabel": "مبلغ المنحة",
+    "grantPurposeLabel": "الغرض",
+    "recentGrants": "أحدث المنح",
+    "noGrants": "لم تُقدّم أي منح بعد."
+  },
+  "stake": {
+    "title": "المساهمة بعملة VDAO",
+    "subtitle": "اشترِ VDAO ببطاقتك عبر Stripe — 1 دولار = 1 VDAO.",
+    "currentBalance": "الرصيد الحالي",
+    "amountLabel": "المبلغ (دولار أمريكي)",
+    "rateNote": "ستحصل على {{amount}} VDAO.",
+    "payWithStripe": "الدفع عبر Stripe",
+    "processing": "جارٍ المعالجة\u2026",
+    "notConfiguredNotice": "لم يتم تهيئة Stripe على هذا الخادم بعد. راجع STRIPE_SECRET_KEY في .env.local.example.",
+    "success": "تم الدفع بنجاح! سيتم إضافة VDAO إلى رصيدك قريبًا.",
+    "canceled": "تم إلغاء الدفع."
+  },
+  "map": {
+    "title": "الخريطة المدنية",
+    "subtitle": "المزوّدون والمشاريع الممولة وطلبات العروض المفتوحة في ديترويت، مدعومة بخرائط جوجل.",
+    "unavailable": "لم يتم تهيئة خرائط جوجل على هذا الخادم. يتم عرض روابط بسيطة بدلاً من ذلك:",
+    "layerVendors": "المزوّدون",
+    "layerProjects": "المشاريع الممولة",
+    "layerRfps": "طلبات العروض المفتوحة",
+    "categoryFilter": "الفئة",
+    "wardFilter": "المنطقة",
+    "allCategories": "الكل",
+    "allWards": "الكل",
+    "legendTitle": "المفتاح",
+    "legendVendor": "مزوّد",
+    "legendProject": "مشروع ممول",
+    "legendRfp": "طلب عروض مفتوح",
+    "viewVendor": "عرض المزوّد",
+    "viewProject": "عرض المشروع",
+    "viewRfp": "عرض طلب العروض"
+  },
+  "ward": {
+    "District1": "المنطقة 1",
+    "District2": "المنطقة 2",
+    "District3": "المنطقة 3",
+    "District4": "المنطقة 4",
+    "District5": "المنطقة 5",
+    "District6": "المنطقة 6",
+    "District7": "المنطقة 7",
+    "Citywide": "على مستوى المدينة"
+  },
+  "rfpStatus": {
+    "Open": "مفتوح",
+    "Closed": "مغلق"
+  },
+  "documentType": {
+    "Passport": "جواز سفر",
+    "DriversLicense": "رخصة قيادة",
+    "StateId": "هوية ولاية",
+    "NationalId": "هوية وطنية"
+  },
+  "rfps": {
+    "title": "طلبات العروض (RFP)",
+    "subtitle": "احتياجات مدنية نشرتها المدينة ليستجيب لها المزوّدون، منظمة حسب الحي/المنطقة.",
+    "postNew": "نشر طلب عروض جديد",
+    "empty": "لم يتم نشر أي طلبات عروض بعد.",
+    "maxAmount": "الحد الأقصى للمبلغ",
+    "respond": "الاستجابة بمقترح",
+    "close": "إغلاق طلب العروض",
+    "titleLabel": "العنوان",
+    "descriptionLabel": "الوصف",
+    "wardLabel": "الحي / المنطقة",
+    "maxAmountLabel": "الحد الأقصى للمبلغ",
+    "submit": "نشر طلب العروض",
+    "submitting": "جارٍ النشر…",
+    "notFound": "طلب العروض غير موجود.",
+    "back": "العودة إلى طلبات العروض",
+    "responses": "المقترحات المستجيبة",
+    "noResponses": "لم يستجب أي مقترح لطلب العروض هذا بعد."
+  },
+  "kyc": {
+    "title": "التحقق من هوية المقيم (KYC)",
+    "subtitle": "تحقق من هويتك وأعلن عن حيّك/منطقتك للتصويت على المقترحات الخاصة بمنطقة معينة.",
+    "statusLabel": "الحالة",
+    "status": {
+      "NotStarted": "لم يبدأ",
+      "Pending": "قيد المراجعة",
+      "Verified": "موثّق",
+      "Rejected": "مرفوض",
+      "Expired": "منتهي الصلاحية"
+    },
+    "documentTypeLabel": "نوع وثيقة الهوية",
+    "fullNameLabel": "الاسم القانوني الكامل",
+    "dobLabel": "تاريخ الميلاد",
+    "documentNumberLabel": "رقم وثيقة الهوية",
+    "privacyNotice": "يتم تجزيء اسمك وتاريخ ميلادك ورقم وثيقتك على جهازك ولا يتم إرسالها أو تخزينها من قِبل VendorDAO أبدًا — يُرسل فقط تجزيء تشفيري أحادي الاتجاه إلى السلسلة.",
+    "validUntilBlock": "صالح حتى الكتلة {{block}}",
+    "expiredAtBlock": "انتهت الصلاحية عند الكتلة {{block}} — يرجى إعادة التحقق",
+    "rejectionReasonLabel": "السبب",
+    "rejectReasonPlaceholder": "سبب الرفض (اختياري)",
+    "wardLabel": "الحي / المنطقة",
+    "wardHint": "يتم تثبيت هذا بمجرد أن تتحقق المدينة من طلبك، بحيث تبقى الأصوات الخاصة بالمنطقة مرتبطة بمقيمين حقيقيين.",
+    "verifyWithStripe": "التحقق من الهوية عبر Stripe",
+    "verifying": "جارٍ التحقق…",
+    "stripeNotConfiguredNotice": "التحقق من الهوية غير مهيأ على هذا الخادم بعد، لذا ستُراجع هذه الطلبات كإعلان ذاتي عن المنطقة. راجع NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY في .env.local.example.",
+    "stripeVerifiedNotice": "تم التحقق من الهوية عبر Stripe.",
+    "submit": "إرسال للمراجعة من المدينة",
+    "submitting": "جارٍ الإرسال…",
+    "pendingNotice": "طلبك في انتظار مراجعة المدينة.",
+    "adminPendingTitle": "طلبات KYC المعلّقة",
+    "adminEmpty": "لا توجد طلبات KYC معلّقة.",
+    "approve": "الموافقة",
+    "reject": "الرفض"
   }
 }

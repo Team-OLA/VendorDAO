@@ -1,6 +1,18 @@
 import { blake2AsU8a, encodeAddress } from "@polkadot/util-crypto";
-import type { Proposal, ProposalStatus, VendorInfo, VendorUpdate } from "@/lib/types";
+import type {
+  DonorInfo,
+  Grant,
+  KycRecord,
+  Proposal,
+  ProposalStatus,
+  Rfp,
+  SpendingReceipt,
+  VendorInfo,
+  VendorUpdate,
+} from "@/lib/types";
 import type { VendorCategory } from "@/lib/vendorCategories";
+import type { DonorType } from "@/lib/donorTypes";
+import type { Ward } from "@/lib/wards";
 
 /** Deterministic, validly-encoded (but unowned) SS58 address for a given demo identity. */
 function demoAddress(seed: string): string {
@@ -126,6 +138,26 @@ export function vendorAddress(key: string): string {
   return demoAddress(key);
 }
 
+/** Approximate coordinates for each demo vendor's business address, for the Apple Maps view. */
+const VENDOR_COORDS_BY_KEY: Record<string, { lat: number; lng: number }> = {
+  "motor-city-restoration": { lat: 42.3486, lng: -83.0645 },
+  "eastern-market-growers": { lat: 42.3467, lng: -83.0393 },
+  "detroit-blight-busters": { lat: 42.4046, lng: -83.1866 },
+  "corktown-community-builders": { lat: 42.329, lng: -83.081 },
+  "belle-isle-conservancy": { lat: 42.3378, lng: -82.9945 },
+  "north-end-youth-arts": { lat: 42.3739, lng: -83.0713 },
+  "riverwalk-green-infra": { lat: 42.3345, lng: -83.0367 },
+};
+
+const VENDOR_COORDS_BY_ADDRESS: Record<string, { lat: number; lng: number }> = Object.fromEntries(
+  Object.entries(VENDOR_COORDS_BY_KEY).map(([key, coords]) => [demoAddress(key), coords]),
+);
+
+/** Looks up a demo vendor's approximate map coordinates by its (derived) on-chain address. */
+export function demoVendorCoords(address: string): { lat: number; lng: number } | null {
+  return VENDOR_COORDS_BY_ADDRESS[address] ?? null;
+}
+
 interface DemoProposalSeed {
   title: string;
   description: string;
@@ -136,6 +168,9 @@ interface DemoProposalSeed {
   nays: number;
   createdAt: number;
   votingEnd: number;
+  ward: Ward;
+  /** Index into RFP_SEEDS this proposal responds to, if any. */
+  rfpIndex?: number;
 }
 
 const PROPOSAL_SEEDS: DemoProposalSeed[] = [
@@ -150,6 +185,7 @@ const PROPOSAL_SEEDS: DemoProposalSeed[] = [
     nays: 37,
     createdAt: 8100,
     votingEnd: 22500,
+    ward: "District5",
   },
   {
     title: "Vacant Lot Greening — North End Corridor",
@@ -162,6 +198,7 @@ const PROPOSAL_SEEDS: DemoProposalSeed[] = [
     nays: 21,
     createdAt: 9500,
     votingEnd: 23900,
+    ward: "District1",
   },
   {
     title: "Grand River Ave Protected Bike Lanes",
@@ -174,6 +211,7 @@ const PROPOSAL_SEEDS: DemoProposalSeed[] = [
     nays: 118,
     createdAt: 15200,
     votingEnd: 29600,
+    ward: "Citywide",
   },
   {
     title: "Eastern Market Cold-Storage Co-op Expansion",
@@ -186,6 +224,7 @@ const PROPOSAL_SEEDS: DemoProposalSeed[] = [
     nays: 42,
     createdAt: 24800,
     votingEnd: 39200,
+    ward: "District4",
   },
   {
     title: "Corktown Rowhouse Rehab — Phase 2",
@@ -198,6 +237,7 @@ const PROPOSAL_SEEDS: DemoProposalSeed[] = [
     nays: 76,
     createdAt: 25100,
     votingEnd: 39500,
+    ward: "District6",
   },
   {
     title: "Chandler Park Recreation Center Renovation",
@@ -210,6 +250,7 @@ const PROPOSAL_SEEDS: DemoProposalSeed[] = [
     nays: 214,
     createdAt: 11300,
     votingEnd: 25700,
+    ward: "District4",
   },
   {
     title: "Youth Mural Arts Program — Grand Boulevard",
@@ -222,6 +263,7 @@ const PROPOSAL_SEEDS: DemoProposalSeed[] = [
     nays: 19,
     createdAt: 26000,
     votingEnd: 40400,
+    ward: "Citywide",
   },
   {
     title: "Riverfront Solar Lighting Initiative",
@@ -234,8 +276,87 @@ const PROPOSAL_SEEDS: DemoProposalSeed[] = [
     nays: 3,
     createdAt: 12800,
     votingEnd: 27200,
+    ward: "District5",
+  },
+  {
+    title: "Eastside Senior Center Roof & Accessibility Upgrade",
+    description:
+      "Replacement of a failing roof and installation of a compliant accessibility ramp and elevator at the Eastside Senior Center, submitted for admin review before opening to a community vote.",
+    vendorKey: "motor-city-restoration",
+    amount: 118000,
+    status: "PendingReview",
+    ayes: 0,
+    nays: 0,
+    createdAt: 27200,
+    votingEnd: 27200,
+    ward: "District3",
+    rfpIndex: 0,
+  },
+  {
+    title: "Private Parking Structure — Downtown Speculative Build",
+    description:
+      "A proposal to fund a privately-operated downtown parking structure. Vetoed by the city administrator as out of scope for the community treasury's public-benefit mandate.",
+    vendorKey: "eastern-market-growers",
+    amount: 420000,
+    status: "Vetoed",
+    ayes: 0,
+    nays: 0,
+    createdAt: 18600,
+    votingEnd: 18600,
+    ward: "Citywide",
   },
 ];
+
+interface DemoRfpSeed {
+  title: string;
+  description: string;
+  ward: Ward;
+  maxAmount: number;
+  status: "Open" | "Closed";
+  createdAt: number;
+}
+
+const RFP_SEEDS: DemoRfpSeed[] = [
+  {
+    title: "Senior Center Accessibility Upgrades — District 3",
+    description:
+      "The city is seeking a qualified contractor to bring the District 3 senior center into full ADA compliance, including a roof repair, accessibility ramp, and elevator installation.",
+    ward: "District3",
+    maxAmount: 150000,
+    status: "Open",
+    createdAt: 27000,
+  },
+  {
+    title: "Vacant Lot Greening — District 1 Expansion",
+    description:
+      "Following the success of the North End corridor greening project, the city is seeking proposals to extend vacant-lot conversion and community gardening to additional District 1 blocks.",
+    ward: "District1",
+    maxAmount: 80000,
+    status: "Open",
+    createdAt: 30000,
+  },
+  {
+    title: "Community Center Playground Equipment — District 6",
+    description:
+      "Replacement playground equipment for the Clark Park community center in Southwest Detroit.",
+    ward: "District6",
+    maxAmount: 45000,
+    status: "Closed",
+    createdAt: 16000,
+  },
+];
+
+export function createDemoRfps(): Rfp[] {
+  return RFP_SEEDS.map((seed, index) => ({
+    id: index,
+    title: seed.title,
+    description: seed.description,
+    ward: seed.ward,
+    maxAmount: units(seed.maxAmount),
+    status: seed.status,
+    createdAt: seed.createdAt,
+  }));
+}
 
 export function createDemoVendors(): VendorInfo[] {
   return VENDOR_SEEDS.map((seed) => {
@@ -269,6 +390,8 @@ export function createDemoProposals(): Proposal[] {
     nays: seed.nays,
     createdAt: seed.createdAt,
     votingEnd: seed.votingEnd,
+    ward: seed.ward,
+    rfpId: seed.rfpIndex ?? null,
   }));
 }
 
@@ -277,7 +400,7 @@ export function createDemoTreasury() {
     (sum, p) => sum + p.amount,
     0,
   );
-  const stillInPot = 420000;
+  const stillInPot = 438000;
   return {
     potAddress: demoAddress("vendor-dao-treasury-pot"),
     potBalance: units(stillInPot),
@@ -294,8 +417,6 @@ export interface TreasuryContribution {
 }
 
 const CONTRIBUTION_SEEDS = [
-  { source: "City of Detroit FY26 Community Investment Allocation", amount: 500000, block: 500 },
-  { source: "Kresge Foundation Matching Grant", amount: 100000, block: 2000 },
   { source: "Community Crowdfunding Drive", amount: 45000, block: 5000 },
   { source: "Local Business Coalition Contribution", amount: 22000, block: 7000 },
 ];
@@ -306,6 +427,90 @@ export function createDemoTreasuryContributions(): TreasuryContribution[] {
     amount: units(seed.amount),
     from: DEMO_ADMIN.address,
     source: seed.source,
+  }));
+}
+
+interface DemoDonorSeed {
+  key: string;
+  name: string;
+  donorType: DonorType;
+  registeredAt: number;
+}
+
+const DONOR_SEEDS: DemoDonorSeed[] = [
+  {
+    key: "vendor-dao-demo-city-admin",
+    name: "City of Detroit",
+    donorType: "Government",
+    registeredAt: 300,
+  },
+  {
+    key: "kresge-foundation",
+    name: "Kresge Foundation",
+    donorType: "Foundation",
+    registeredAt: 1800,
+  },
+  {
+    key: "detroit-regional-chamber",
+    name: "Detroit Regional Chamber",
+    donorType: "Corporation",
+    registeredAt: 6500,
+  },
+];
+
+export function donorAddress(key: string): string {
+  return demoAddress(key);
+}
+
+interface DemoGrantSeed {
+  donorKey: string;
+  amount: number;
+  purpose: string;
+  block: number;
+}
+
+const GRANT_SEEDS: DemoGrantSeed[] = [
+  {
+    donorKey: "vendor-dao-demo-city-admin",
+    amount: 500000,
+    purpose: "FY26 Community Investment Allocation for citywide vendor funding.",
+    block: 500,
+  },
+  {
+    donorKey: "kresge-foundation",
+    amount: 100000,
+    purpose: "Matching grant to accelerate neighborhood revitalization proposals.",
+    block: 2000,
+  },
+  {
+    donorKey: "detroit-regional-chamber",
+    amount: 18000,
+    purpose: "Small-business and workforce development support for Detroit vendors.",
+    block: 6800,
+  },
+];
+
+export function createDemoDonors(): DonorInfo[] {
+  return DONOR_SEEDS.map((seed) => {
+    const grants = GRANT_SEEDS.filter((g) => g.donorKey === seed.key);
+    return {
+      address: donorAddress(seed.key),
+      name: seed.name,
+      donorType: seed.donorType,
+      registeredAt: seed.registeredAt,
+      totalContributed: units(grants.reduce((sum, g) => sum + g.amount, 0)),
+      grantsMade: grants.length,
+    };
+  });
+}
+
+export function createDemoGrants(): Grant[] {
+  return GRANT_SEEDS.map((seed, index) => ({
+    id: index,
+    donor: donorAddress(seed.donorKey),
+    amount: units(seed.amount),
+    purpose: seed.purpose,
+    submittedAt: seed.block,
   }));
 }
 
@@ -410,6 +615,71 @@ export function createDemoVendorUpdates(): VendorUpdate[] {
     vendor: vendorAddress(seed.vendorKey),
     content: seed.content,
     proposalId: seed.proposalIndex,
+    postedAt: seed.postedAt,
+  }));
+}
+
+interface DemoSpendingReceiptSeed {
+  proposalIndex: number;
+  vendorKey: string;
+  amount: number;
+  category: string;
+  description: string;
+  postedAt: number;
+}
+
+const SPENDING_RECEIPT_SEEDS: DemoSpendingReceiptSeed[] = [
+  {
+    proposalIndex: 0,
+    vendorKey: "belle-isle-conservancy",
+    amount: 92000,
+    category: "Materials",
+    description: "Custom-fabricated glass panels and structural steel framing for the dome restoration.",
+    postedAt: 23100,
+  },
+  {
+    proposalIndex: 0,
+    vendorKey: "belle-isle-conservancy",
+    amount: 68000,
+    category: "Labor",
+    description: "Specialty glazier and ironwork crews, 14-week installation.",
+    postedAt: 24600,
+  },
+  {
+    proposalIndex: 0,
+    vendorKey: "belle-isle-conservancy",
+    amount: 12000,
+    category: "Permits & Inspections",
+    description: "Historic preservation permits and structural engineering sign-off.",
+    postedAt: 24800,
+  },
+  {
+    proposalIndex: 1,
+    vendorKey: "detroit-blight-busters",
+    amount: 24000,
+    category: "Materials",
+    description: "Topsoil, native plants, and raised-bed lumber for the community gardens.",
+    postedAt: 24200,
+  },
+  {
+    proposalIndex: 1,
+    vendorKey: "detroit-blight-busters",
+    amount: 30000,
+    category: "Labor",
+    description: "Crew wages for clearing and planting across all 24 vacant lots.",
+    postedAt: 25000,
+  },
+];
+
+export function createDemoSpendingReceipts(): SpendingReceipt[] {
+  return SPENDING_RECEIPT_SEEDS.map((seed, index) => ({
+    id: index,
+    proposalId: seed.proposalIndex,
+    vendor: vendorAddress(seed.vendorKey),
+    amount: units(seed.amount),
+    category: seed.category,
+    description: seed.description,
+    attachmentHash: null,
     postedAt: seed.postedAt,
   }));
 }

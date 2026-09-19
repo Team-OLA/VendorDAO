@@ -3,7 +3,7 @@
     "name": "VendorDAO",
     "tagline": "Financiación de proveedores municipales, abierta y transparente, impulsada por Polkadot."
   },
-  "nav": { "dashboard": "Panel", "proposals": "Propuestas", "vendors": "Proveedores", "ledger": "Libro Mayor" },
+  "nav": { "dashboard": "Panel", "proposals": "Propuestas", "rfps": "Licitaciones", "vendors": "Proveedores", "donors": "Donantes", "map": "Mapa", "stake": "Invertir", "kyc": "KYC", "ledger": "Libro Mayor", "menu": "Menú" },
   "wallet": {
     "connect": "Conectar Billetera",
     "connecting": "Conectando…",
@@ -24,11 +24,13 @@
     "categoryBreakdown": "Financiación por Categoría"
   },
   "status": {
+    "PendingReview": "En Revisión",
     "Proposed": "Votación Abierta",
     "Approved": "Aprobada",
     "Rejected": "Rechazada",
     "Funded": "Financiada",
-    "Cancelled": "Cancelada"
+    "Cancelled": "Cancelada",
+    "Vetoed": "Vetada"
   },
   "proposals": {
     "title": "Propuestas",
@@ -50,10 +52,32 @@
     "connectToVote": "Conecta tu billetera para votar.",
     "closeVoting": "Contar votos",
     "retryDisbursement": "Reintentar desembolso",
+    "vetApprove": "Aprobar para votación",
+    "vetVeto": "Vetar propuesta",
+    "pendingReviewNotice": "Esta propuesta está a la espera de revisión administrativa antes de abrirse a votación comunitaria.",
+    "vetoedNotice": "Esta propuesta fue vetada por un administrador y nunca se abrió a votación.",
+    "respondingToRfp": "Respondiendo a la RFP",
+    "wardRestrictedNotice": "Votar en esta propuesta está restringido a residentes verificados de {{ward}}. Verifícate en",
     "translate": "Traducir",
     "showOriginal": "Mostrar original",
     "translating": "Traduciendo…",
-    "notFound": "Propuesta no encontrada."
+    "notFound": "Propuesta no encontrada.",
+    "fundsBreakdown": "Desglose de Fondos",
+    "receiptedOfDisbursed": "{{receipted}} de {{disbursed}} {{symbol}} justificados",
+    "remainingToReceipt": "{{amount}} {{symbol}} restantes por justificar",
+    "noReceipts": "Aún no se ha justificado ningún gasto.",
+    "postReceipt": "Publicar un Comprobante de Gasto",
+    "postingReceipt": "Publicando…",
+    "receiptCategoryLabel": "Categoría",
+    "receiptAmountLabel": "Monto",
+    "receiptDescriptionLabel": "¿En qué se gastó esto?",
+    "receiptExceedsRemaining": "Este monto supera lo que queda por justificar para esta propuesta.",
+    "receiptAttachmentLabel": "Adjuntar foto del recibo o PDF (opcional)",
+    "attachmentHint": "Solo se envía a la cadena un hash criptográfico de este archivo; el archivo en sí permanece únicamente en tu navegador.",
+    "attachmentTooLarge": "Ese archivo es demasiado grande para adjuntar (máximo 2 MB).",
+    "receiptAttachmentAlt": "Vista previa del comprobante adjunto",
+    "viewAttachment": "Ver adjunto",
+    "attachmentOnFile": "Adjunto registrado (hash {{hash}}…) — no disponible para vista previa en este dispositivo"
   },
   "newProposal": {
     "title": "Enviar una Propuesta",
@@ -61,6 +85,10 @@
     "selectVendor": "Selecciona un proveedor registrado",
     "titleLabel": "Título",
     "descriptionLabel": "Descripción",
+    "wardLabel": "Vecindario / Distrito",
+    "wardHint": "Elige \"Toda la Ciudad\" si esta propuesta no es específica de un distrito — las propuestas de toda la ciudad están abiertas a todos los votantes.",
+    "respondingToRfp": "Respondiendo a la RFP: {{title}}.",
+    "rfpMaxAmount": "Monto máximo: {{amount}} {{symbol}}.",
     "amountLabel": "Monto Solicitado",
     "submit": "Enviar Propuesta",
     "submitting": "Enviando…",
@@ -139,7 +167,12 @@
     "description": "Descripción",
     "amount": "Monto",
     "party": "Parte",
-    "empty": "Aún no hay transacciones."
+    "empty": "Aún no hay transacciones.",
+    "spendingBreakdown": "Adónde Fue el Dinero",
+    "byWard": "Desembolsado por Barrio/Distrito",
+    "byCategory": "Desembolsado por Categoría de Proveedor",
+    "topVendors": "Proveedores Más Financiados",
+    "noSpending": "Aún no se ha desembolsado ningún fondo."
   },
   "ledgerType": {
     "TreasuryContribution": "Contribución al Tesoro",
@@ -147,7 +180,10 @@
     "ProposalSubmitted": "Propuesta Enviada",
     "ProposalFunded": "Propuesta Financiada",
     "ProposalRejected": "Propuesta Rechazada",
-    "ProposalCancelled": "Propuesta Cancelada"
+    "ProposalCancelled": "Propuesta Cancelada",
+    "DonorRegistered": "Donante Registrado",
+    "GrantSubmitted": "Subvención Enviada",
+    "TokensStaked": "Tokens Invertidos"
   },
   "vendorDetail": {
     "back": "Volver a proveedores",
@@ -164,5 +200,137 @@
     "posting": "Publicando…",
     "onlyVendorCanPost": "Conecta la cuenta de billetera propia de este proveedor para publicar actualizaciones.",
     "postSuccess": "¡Actualización publicada!"
+  },
+  "donorType": {
+    "Individual": "Individual",
+    "Foundation": "Fundación",
+    "Corporation": "Corporación",
+    "Government": "Gobierno",
+    "Other": "Otro"
+  },
+  "registerDonor": {
+    "title": "Registrarse como Donante",
+    "nameLabel": "Nombre del Donante / Organización",
+    "typeLabel": "Tipo de Donante",
+    "submit": "Registrar",
+    "submitting": "Registrando\u2026"
+  },
+  "donors": {
+    "title": "Registro de Donantes y Subvenciones",
+    "subtitle": "Cada donante registrado y cada subvención nombrada al tesoro público \u2014 totalmente pública y auditable.",
+    "registerNew": "Registrarse como Donante",
+    "empty": "Aún no hay donantes registrados.",
+    "totalContributed": "Total Contribuido",
+    "grantsMade": "Subvenciones Realizadas",
+    "submitGrant": "Enviar una Subvención",
+    "submittingGrant": "Enviando\u2026",
+    "grantAmountLabel": "Monto de la Subvención",
+    "grantPurposeLabel": "Propósito",
+    "recentGrants": "Subvenciones Recientes",
+    "noGrants": "Aún no se han enviado subvenciones."
+  },
+  "stake": {
+    "title": "Invertir en VDAO",
+    "subtitle": "Compra VDAO con tarjeta a través de Stripe \u2014 $1 = 1 VDAO.",
+    "currentBalance": "Saldo Actual",
+    "amountLabel": "Monto (USD)",
+    "rateNote": "Recibirás {{amount}} VDAO.",
+    "payWithStripe": "Pagar con Stripe",
+    "processing": "Procesando\u2026",
+    "notConfiguredNotice": "Stripe aún no está configurado en este servidor. Consulta STRIPE_SECRET_KEY en .env.local.example.",
+    "success": "¡Pago exitoso! Tu VDAO se acreditará en breve.",
+    "canceled": "Pago cancelado."
+  },
+  "map": {
+    "title": "Mapa Cívico",
+    "subtitle": "Proveedores, proyectos financiados y licitaciones abiertas en Detroit, impulsado por Google Maps.",
+    "unavailable": "Google Maps no está configurado en este servidor. Mostrando enlaces simples en su lugar:",
+    "layerVendors": "Proveedores",
+    "layerProjects": "Proyectos Financiados",
+    "layerRfps": "Licitaciones Abiertas",
+    "categoryFilter": "Categoría",
+    "wardFilter": "Distrito",
+    "allCategories": "Todas",
+    "allWards": "Todos",
+    "legendTitle": "Leyenda",
+    "legendVendor": "Proveedor",
+    "legendProject": "Proyecto Financiado",
+    "legendRfp": "Licitación Abierta",
+    "viewVendor": "Ver proveedor",
+    "viewProject": "Ver proyecto",
+    "viewRfp": "Ver licitación"
+  },
+  "ward": {
+    "District1": "Distrito 1",
+    "District2": "Distrito 2",
+    "District3": "Distrito 3",
+    "District4": "Distrito 4",
+    "District5": "Distrito 5",
+    "District6": "Distrito 6",
+    "District7": "Distrito 7",
+    "Citywide": "Toda la Ciudad"
+  },
+  "rfpStatus": {
+    "Open": "Abierta",
+    "Closed": "Cerrada"
+  },
+  "documentType": {
+    "Passport": "Pasaporte",
+    "DriversLicense": "Licencia de Conducir",
+    "StateId": "Identificación Estatal",
+    "NationalId": "Identificación Nacional"
+  },
+  "rfps": {
+    "title": "Solicitudes de Propuestas (RFP)",
+    "subtitle": "Necesidades cívicas que la ciudad ha publicado para que los proveedores respondan, organizadas por vecindario/distrito.",
+    "postNew": "Publicar una Nueva RFP",
+    "empty": "Aún no se han publicado RFPs.",
+    "maxAmount": "Monto Máximo",
+    "respond": "Responder con una Propuesta",
+    "close": "Cerrar RFP",
+    "titleLabel": "Título",
+    "descriptionLabel": "Descripción",
+    "wardLabel": "Vecindario / Distrito",
+    "maxAmountLabel": "Monto Máximo",
+    "submit": "Publicar RFP",
+    "submitting": "Publicando…",
+    "notFound": "RFP no encontrada.",
+    "back": "Volver a RFPs",
+    "responses": "Propuestas de Respuesta",
+    "noResponses": "Aún ninguna propuesta ha respondido a esta RFP."
+  },
+  "kyc": {
+    "title": "Verificación de Residente (KYC)",
+    "subtitle": "Verifica tu identidad y declara tu vecindario/distrito para votar en propuestas específicas de distrito.",
+    "statusLabel": "Estado",
+    "status": {
+      "NotStarted": "No Iniciado",
+      "Pending": "En Revisión",
+      "Verified": "Verificado",
+      "Rejected": "Rechazado",
+      "Expired": "Vencido"
+    },
+    "documentTypeLabel": "Tipo de Documento de Identidad",
+    "fullNameLabel": "Nombre Legal Completo",
+    "dobLabel": "Fecha de Nacimiento",
+    "documentNumberLabel": "Número de Documento de Identidad",
+    "privacyNotice": "Tu nombre, fecha de nacimiento y número de documento se cifran (hash) en tu dispositivo y nunca se envían ni almacenan en VendorDAO — solo se envía un hash criptográfico unidireccional a la cadena.",
+    "validUntilBlock": "Válido hasta el bloque {{block}}",
+    "expiredAtBlock": "Venció en el bloque {{block}} — por favor vuelve a verificarte",
+    "rejectionReasonLabel": "Motivo",
+    "rejectReasonPlaceholder": "Motivo del rechazo (opcional)",
+    "wardLabel": "Vecindario / Distrito",
+    "wardHint": "Se fija de forma permanente una vez que la ciudad verifique tu solicitud, para que los votos por distrito permanezcan vinculados a residentes reales.",
+    "verifyWithStripe": "Verificar Identidad con Stripe",
+    "verifying": "Verificando…",
+    "stripeNotConfiguredNotice": "La verificación de identidad aún no está configurada en este servidor, por lo que esta solicitud será revisada como una declaración de distrito autodeclarada. Consulta NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY en .env.local.example.",
+    "stripeVerifiedNotice": "Identidad verificada con Stripe.",
+    "submit": "Enviar para Revisión Municipal",
+    "submitting": "Enviando…",
+    "pendingNotice": "Tu solicitud está a la espera de revisión municipal.",
+    "adminPendingTitle": "Solicitudes de KYC Pendientes",
+    "adminEmpty": "No hay solicitudes de KYC pendientes.",
+    "approve": "Aprobar",
+    "reject": "Rechazar"
   }
 }

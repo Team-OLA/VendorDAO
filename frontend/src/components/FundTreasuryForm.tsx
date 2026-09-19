@@ -7,6 +7,7 @@ import { useWallet } from "@/hooks/useWallet";
 import { CHAIN_TOKEN_SYMBOL, parseTokenAmount } from "@/lib/chain";
 import { useDemoMode } from "@/lib/demo/DemoModeContext";
 import { signAndSendTx } from "@/lib/signAndSend";
+import { Button } from "./ui/Button";
 
 /** Lets anyone contribute funds to the public, transparent treasury pot. */
 export function FundTreasuryForm({
@@ -51,7 +52,7 @@ export function FundTreasuryForm({
   return (
     <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-2">
       <div>
-        <label className="block text-xs text-white/50">
+        <label className="block text-xs text-gray-500">
           {t("dashboard.contribute")} ({CHAIN_TOKEN_SYMBOL})
         </label>
         <input
@@ -60,27 +61,19 @@ export function FundTreasuryForm({
           required
           inputMode="decimal"
           placeholder="0.0"
-          className="mt-1 w-32 rounded-md border border-white/20 bg-transparent px-2 py-1 text-sm"
+          className="mt-1 w-32 rounded-md border border-gray-300 bg-white px-2 py-1 text-sm"
         />
       </div>
       {accounts.length === 0 ? (
-        <button
-          type="button"
-          onClick={connect}
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500"
-        >
+        <Button type="button" onClick={connect}>
           {t("wallet.connect")}
-        </button>
+        </Button>
       ) : (
-        <button
-          type="submit"
-          disabled={submitting}
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-60"
-        >
+        <Button type="submit" disabled={submitting}>
           {submitting ? t("newProposal.submitting") : t("dashboard.contributeSubmit")}
-        </button>
+        </Button>
       )}
-      {error && <p className="w-full text-xs text-red-400">{error}</p>}
+      {error && <p className="w-full text-xs text-red-600">{error}</p>}
     </form>
   );
 }

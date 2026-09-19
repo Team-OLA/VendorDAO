@@ -3,7 +3,7 @@
     "name": "VendorDAO",
     "tagline": "Polkadot द्वारा संचालित, संपूर्ण शहर के लिए खुला और पारदर्शी वेंडर फंडिंग मंच।"
   },
-  "nav": { "dashboard": "डैशबोर्ड", "proposals": "प्रस्ताव", "vendors": "विक्रेता", "ledger": "खाता-बही" },
+  "nav": { "dashboard": "डैशबोर्ड", "proposals": "प्रस्ताव", "rfps": "RFP", "vendors": "विक्रेता", "donors": "दानदाता", "map": "मानचित्र", "stake": "स्टेक करें", "kyc": "KYC", "ledger": "खाता-बही", "menu": "मेनू" },
   "wallet": {
     "connect": "वॉलेट कनेक्ट करें",
     "connecting": "कनेक्ट हो रहा है…",
@@ -24,11 +24,13 @@
     "categoryBreakdown": "श्रेणी के अनुसार फंडिंग"
   },
   "status": {
+    "PendingReview": "समीक्षा लंबित",
     "Proposed": "मतदान जारी",
     "Approved": "स्वीकृत",
     "Rejected": "अस्वीकृत",
     "Funded": "वित्तपोषित",
-    "Cancelled": "रद्द"
+    "Cancelled": "रद्द",
+    "Vetoed": "अस्वीकृत"
   },
   "proposals": {
     "title": "प्रस्ताव",
@@ -50,10 +52,32 @@
     "connectToVote": "वोट करने के लिए अपना वॉलेट कनेक्ट करें।",
     "closeVoting": "वोटों की गिनती करें",
     "retryDisbursement": "भुगतान पुनः प्रयास करें",
+    "vetApprove": "मतदान के लिए स्वीकृत करें",
+    "vetVeto": "प्रस्ताव अस्वीकृत करें",
+    "pendingReviewNotice": "यह प्रस्ताव सामुदायिक मतदान हेतु खुलने से पहले प्रशासकीय समीक्षा की प्रतीक्षा कर रहा है।",
+    "vetoedNotice": "इस प्रस्ताव को एक प्रशासक द्वारा अस्वीकृत कर दिया गया था और यह कभी मतदान के लिए नहीं खुला।",
+    "respondingToRfp": "RFP का जवाब",
+    "wardRestrictedNotice": "इस प्रस्ताव पर मतदान केवल {{ward}} के सत्यापित निवासियों तक सीमित है। यहां सत्यापित हों:",
     "translate": "अनुवाद करें",
     "showOriginal": "मूल दिखाएं",
     "translating": "अनुवाद हो रहा है…",
-    "notFound": "प्रस्ताव नहीं मिला।"
+    "notFound": "प्रस्ताव नहीं मिला।",
+    "fundsBreakdown": "धन विवरण",
+    "receiptedOfDisbursed": "{{disbursed}} {{symbol}} में से {{receipted}} दर्ज किया गया",
+    "remainingToReceipt": "{{amount}} {{symbol}} दर्ज किए जाने शेष हैं",
+    "noReceipts": "अभी तक कोई खर्च दर्ज नहीं किया गया है।",
+    "postReceipt": "खर्च रसीद दर्ज करें",
+    "postingReceipt": "पोस्ट किया जा रहा हैं…",
+    "receiptCategoryLabel": "श्रेणी",
+    "receiptAmountLabel": "राशि",
+    "receiptDescriptionLabel": "यह राशि किस पर खर्च की गई?",
+    "receiptExceedsRemaining": "यह राशि इस प्रस्ताव के लिए शेष रकम से अधिक है।",
+    "receiptAttachmentLabel": "रसीद की फोटो या PDF संलग्न करें (वैकल्पिक)",
+    "attachmentHint": "इस फ़ाइल का केवल एक क्रिप्टोग्राफिक हैश ही चेन पर भेजा जाता है; फ़ाइल केवल आपके ब्राउज़र में ही रहती है।",
+    "attachmentTooLarge": "यह फ़ाइल संलग्न करने के लिए बहुत बड़ी है (अधिकतम 2 MB)।",
+    "receiptAttachmentAlt": "रसीद संलग्नक पूर्वावलोकन",
+    "viewAttachment": "संलग्नक देखें",
+    "attachmentOnFile": "संलग्नक दर्ज है (हैश {{hash}}…) — इस डिवाइस पर पूर्वावलोकन हेतु उपलब्ध नहीं"
   },
   "newProposal": {
     "title": "प्रस्ताव सबमिट करें",
@@ -61,6 +85,10 @@
     "selectVendor": "एक पंजीकृत विक्रेता चुनें",
     "titleLabel": "शीर्षक",
     "descriptionLabel": "विवरण",
+    "wardLabel": "मोहल्ला / जिला",
+    "wardHint": "यदि यह प्रस्ताव किसी एक जिले के लिए विशिष्ट नहीं है तो \"पूरे शहर में\" चुनें — पूरे शहर के प्रस्ताव सभी मतदाताओं के लिए खुले होते हैं।",
+    "respondingToRfp": "RFP का जवाब दे रहे हैं: {{title}}।",
+    "rfpMaxAmount": "अधिकतम राशि: {{amount}} {{symbol}}।",
     "amountLabel": "मांगी गई राशि",
     "submit": "प्रस्ताव सबमिट करें",
     "submitting": "सबमिट हो रहा है…",
@@ -139,7 +167,12 @@
     "description": "विवरण",
     "amount": "राशि",
     "party": "पक्ष",
-    "empty": "अभी तक कोई लेनदेन नहीं है।"
+    "empty": "अभी तक कोई लेनदेन नहीं है।",
+    "spendingBreakdown": "पैसा कहाँ गया",
+    "byWard": "वार्ड/मोहल्ले के अनुसार भुगतान",
+    "byCategory": "विक्रेता श्रेणी के अनुसार भुगतान",
+    "topVendors": "सर्वाधिक वित्तपोषित विक्रेता",
+    "noSpending": "अभी तक कोई धनराशि वितरित नहीं हुई है।"
   },
   "ledgerType": {
     "TreasuryContribution": "कोष योगदान",
@@ -147,7 +180,10 @@
     "ProposalSubmitted": "प्रस्ताव सबमिट किया गया",
     "ProposalFunded": "प्रस्ताव वित्तपोषित",
     "ProposalRejected": "प्रस्ताव अस्वीकृत",
-    "ProposalCancelled": "प्रस्ताव रद्द"
+    "ProposalCancelled": "प्रस्ताव रद्द",
+    "DonorRegistered": "दानदाता पंजीकृत",
+    "GrantSubmitted": "अनुदान सबमिट किया गया",
+    "TokensStaked": "टोकन स्टेक किए गए"
   },
   "vendorDetail": {
     "back": "विक्रेताओं पर वापस जाएं",
@@ -164,5 +200,137 @@
     "posting": "पोस्ट हो रहा है…",
     "onlyVendorCanPost": "अपडेट पोस्ट करने के लिए इस विक्रेता के अपने वॉलेट खाते को कनेक्ट करें।",
     "postSuccess": "अपडेट पोस्ट किया गया!"
+  },
+  "donorType": {
+    "Individual": "व्यक्तिगत",
+    "Foundation": "फाउंडेशन",
+    "Corporation": "कॉर्पोरेशन",
+    "Government": "सरकार",
+    "Other": "अन्य"
+  },
+  "registerDonor": {
+    "title": "दानदाता के रूप में पंजीकरण करें",
+    "nameLabel": "दानदाता / संगठन का नाम",
+    "typeLabel": "दानदाता प्रकार",
+    "submit": "पंजीकरण करें",
+    "submitting": "पंजीकरण हो रहा है\u2026"
+  },
+  "donors": {
+    "title": "दानदाता और अनुदान रजिस्ट्री",
+    "subtitle": "सार्वजनिक कोष में हर पंजीकृत दानदाता और हर नामीत अनुदान — पूरी तरह सार्वजनिक और ऑडिट योग्य।",
+    "registerNew": "दानदाता के रूप में पंजीकरण करें",
+    "empty": "अभी तक कोई दानदाता पंजीकृत नहीं है।",
+    "totalContributed": "कुल योगदान",
+    "grantsMade": "दिए गए अनुदान",
+    "submitGrant": "अनुदान सबमिट करें",
+    "submittingGrant": "सबमिट हो रहा है\u2026",
+    "grantAmountLabel": "अनुदान राशि",
+    "grantPurposeLabel": "उद्देश्य",
+    "recentGrants": "हाल के अनुदान",
+    "noGrants": "अभी तक कोई अनुदान सबमिट नहीं किया गया है।"
+  },
+  "stake": {
+    "title": "VDAO स्टेक करें",
+    "subtitle": "Stripe के माध्यम से कार्ड से VDAO खरीदें — $1 = 1 VDAO।",
+    "currentBalance": "वर्तमान शेष",
+    "amountLabel": "राशि (USD)",
+    "rateNote": "आपको {{amount}} VDAO प्राप्त होंगे।",
+    "payWithStripe": "Stripe से भुगतान करें",
+    "processing": "प्रोसेस हो रहा है\u2026",
+    "notConfiguredNotice": "इस सर्वर पर Stripe अभी कॉन्फ़िगर नहीं है। .env.local.example में STRIPE_SECRET_KEY देखें।",
+    "success": "भुगतान सफल! आपका VDAO जल्द ही क्रेडिट कर दिया जाएगा।",
+    "canceled": "भुगतान रद्द कर दिया गया।"
+  },
+  "map": {
+    "title": "नागरिक मानचित्र",
+    "subtitle": "डेट्रॉइट भर में विक्रेता, वित्तपोषित परियोजनाएँ, और खुले RFP, Google Maps द्वारा संचालित।",
+    "unavailable": "इस सर्वर पर Google Maps कॉन्फ़िगर नहीं है। इसके बजाय साधारण लिंक दिखाए जा रहे हैं:",
+    "layerVendors": "विक्रेता",
+    "layerProjects": "वित्तपोषित परियोजनाएँ",
+    "layerRfps": "खुले RFP",
+    "categoryFilter": "श्रेणी",
+    "wardFilter": "जिला",
+    "allCategories": "सभी",
+    "allWards": "सभी",
+    "legendTitle": "लीजेंड",
+    "legendVendor": "विक्रेता",
+    "legendProject": "वित्तपोषित परियोजना",
+    "legendRfp": "खुला RFP",
+    "viewVendor": "विक्रेता देखें",
+    "viewProject": "परियोजना देखें",
+    "viewRfp": "RFP देखें"
+  },
+  "ward": {
+    "District1": "जिला 1",
+    "District2": "जिला 2",
+    "District3": "जिला 3",
+    "District4": "जिला 4",
+    "District5": "जिला 5",
+    "District6": "जिला 6",
+    "District7": "जिला 7",
+    "Citywide": "पूरे शहर में"
+  },
+  "rfpStatus": {
+    "Open": "खुला",
+    "Closed": "बंद"
+  },
+  "documentType": {
+    "Passport": "पासपोर्ट",
+    "DriversLicense": "ड्राइविंग लाइसेंस",
+    "StateId": "राज्य पहचान पत्र",
+    "NationalId": "राष्ट्रीय पहचान पत्र"
+  },
+  "rfps": {
+    "title": "प्रस्ताव अनुरोध (RFP)",
+    "subtitle": "शहर द्वारा पोस्ट की गई नागरिक आवश्यकताएं जिन पर विक्रेता प्रतिक्रिया दे सकते हैं, मोहल्ले/जिले के अनुसार व्यवस्थित।",
+    "postNew": "नया RFP पोस्ट करें",
+    "empty": "अभी तक कोई RFP पोस्ट नहीं किया गया है।",
+    "maxAmount": "अधिकतम राशि",
+    "respond": "प्रस्ताव के साथ प्रतिक्रिया दें",
+    "close": "RFP बंद करें",
+    "titleLabel": "शीर्षक",
+    "descriptionLabel": "विवरण",
+    "wardLabel": "मोहल्ला / जिला",
+    "maxAmountLabel": "अधिकतम राशि",
+    "submit": "RFP पोस्ट करें",
+    "submitting": "पोस्ट हो रहा है…",
+    "notFound": "RFP नहीं मिला।",
+    "back": "RFP पर वापस जाएं",
+    "responses": "प्रतिक्रिया प्रस्ताव",
+    "noResponses": "अभी तक किसी प्रस्ताव ने इस RFP का जवाब नहीं दिया है।"
+  },
+  "kyc": {
+    "title": "निवासी सत्यापन (KYC)",
+    "subtitle": "जिला-विशिष्ट प्रस्तावों पर मतदान के लिए अपनी पहचान सत्यापित करें और अपना मोहल्ला/जिला घोषित करें।",
+    "statusLabel": "स्थिति",
+    "status": {
+      "NotStarted": "शुरू नहीं हुआ",
+      "Pending": "समीक्षा लंबित",
+      "Verified": "सत्यापित",
+      "Rejected": "अस्वीकृत",
+      "Expired": "समाप्त"
+    },
+    "documentTypeLabel": "पहचान दस्तावेज़ प्रकार",
+    "fullNameLabel": "पूरा कानूनी नाम",
+    "dobLabel": "जन्म तिथि",
+    "documentNumberLabel": "पहचान दस्तावेज़ संख्या",
+    "privacyNotice": "आपका नाम, जन्मतिथि, और दस्तावेज़ संख्या आपके डिवाइस पर हैश की जाती है और कभी भी VendorDAO को नहीं भेजी जाती ।या संग्रहीत नहीं की जाती — केवल एक तरफ़ा क्रिप्टोग्राफ़िक हैश ही चेन पर सबमिट की जाती है।",
+    "validUntilBlock": "ब्लॉक {{block}} तक मान्य",
+    "expiredAtBlock": "ब्लॉक {{block}} पर समाप्त हो गया — कृपया पुनः सत्यापन करें",
+    "rejectionReasonLabel": "कारण",
+    "rejectReasonPlaceholder": "अस्वीकृति का कारण (वैकल्पिक)",
+    "wardLabel": "मोहल्ला / जिला",
+    "wardHint": "शहर द्वारा आपके अनुरोध को सत्यापित करने के बाद इसे लॉक कर दिया जाता है, ताकि जिला-विशिष्ट वोट वास्तविक निवासियों से जुड़े रहें।",
+    "verifyWithStripe": "Stripe से पहचान सत्यापित करें",
+    "verifying": "सत्यापन हो रहा है…",
+    "stripeNotConfiguredNotice": "इस सर्वर पर पहचान सत्यापन अभी कॉन्फ़िगर नहीं है, इसलिए इस अनुरोध की समीक्षा स्व-घोषित जिले के रूप में की जाएगी। .env.local.example में NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY देखें।",
+    "stripeVerifiedNotice": "Stripe से पहचान सत्यापित हो गई।",
+    "submit": "शहर की समीक्षा हेतु सबमिट करें",
+    "submitting": "सबमिट हो रहा है…",
+    "pendingNotice": "आपका अनुरोध शहर की समीक्षा की प्रतीक्षा कर रहा है।",
+    "adminPendingTitle": "लंबित KYC अनुरोध",
+    "adminEmpty": "कोई लंबित KYC अनुरोध नहीं है।",
+    "approve": "स्वीकृत करें",
+    "reject": "अस्वीकृत करें"
   }
 }

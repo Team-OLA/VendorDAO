@@ -9,6 +9,8 @@ import { useVendor } from "@/hooks/useVendor";
 import { useVendorUpdates } from "@/hooks/useVendorUpdates";
 import { useWallet } from "@/hooks/useWallet";
 import { TranslateButton } from "@/components/TranslateButton";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import { useDemoMode } from "@/lib/demo/DemoModeContext";
 import { signAndSendTx } from "@/lib/signAndSend";
 import { CHAIN_TOKEN_SYMBOL, formatTokenAmount, truncateAddress } from "@/lib/chain";
@@ -58,85 +60,77 @@ export default function VendorDetailPage({ params }: { params: Promise<{ address
   };
 
   if (loading && !vendor) {
-    return <p className="text-sm text-white/60">{t("common.loading")}</p>;
+    return <p className="text-sm text-gray-500">{t("common.loading")}</p>;
   }
   if (notFound) {
-    return <p className="text-sm text-red-400">{t("vendorDetail.notFound")}</p>;
+    return <p className="text-sm text-red-600">{t("vendorDetail.notFound")}</p>;
   }
   if (!vendor) return null;
 
   return (
     <div className="max-w-2xl space-y-6">
-      <Link href="/vendors" className="text-sm text-indigo-400 hover:text-indigo-300">
+      <Link href="/vendors" className="text-sm text-[#1736F5] hover:text-[#122bc9]">
         ← {t("vendorDetail.back")}
       </Link>
 
       <div className="flex items-start justify-between gap-3">
         <h1 className="text-2xl font-semibold">{vendor.name}</h1>
-        <span
-          className={`rounded-full px-2 py-0.5 text-xs ring-1 ring-inset ${
-            vendor.verified
-              ? "bg-emerald-500/15 text-emerald-300 ring-emerald-500/30"
-              : "bg-zinc-500/15 text-zinc-300 ring-zinc-500/30"
-          }`}
-        >
+        <Badge variant={vendor.verified ? "emerald" : "zinc"}>
           {vendor.verified ? t("vendors.verified") : t("vendors.unverified")}
-        </span>
+        </Badge>
       </div>
 
-      <span className="inline-block rounded-full bg-indigo-500/15 px-2 py-0.5 text-xs text-indigo-300 ring-1 ring-inset ring-indigo-500/30">
-        {t(`vendorCategory.${vendor.category}`)}
-      </span>
+      <Badge variant="indigo">{t(`vendorCategory.${vendor.category}`)}</Badge>
 
-      <div className="rounded-lg border border-white/10 p-4 text-sm">
+      <div className="rounded-lg border border-gray-200 bg-white p-4 text-sm shadow-sm">
         <TranslateButton text={vendor.description} />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 text-sm text-white/70 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 sm:grid-cols-3">
         <div>
-          <p className="text-white/50">{t("vendors.contact")}</p>
+          <p className="text-gray-500">{t("vendors.contact")}</p>
           <p className="break-words">{vendor.contact}</p>
         </div>
         <div>
-          <p className="text-white/50">{t("registerVendor.businessAddressLabel")}</p>
+          <p className="text-gray-500">{t("registerVendor.businessAddressLabel")}</p>
           <p className="break-words">{vendor.businessAddress}</p>
         </div>
         {vendor.website && (
           <div>
-            <p className="text-white/50">{t("registerVendor.websiteLabel")}</p>
+            <p className="text-gray-500">{t("registerVendor.websiteLabel")}</p>
             <a
               href={vendor.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="break-words text-indigo-400 hover:text-indigo-300"
+              className="break-words text-[#1736F5] hover:text-[#122bc9]"
             >
               {vendor.website}
             </a>
           </div>
         )}
         <div>
-          <p className="text-white/50">{t("vendors.totalReceived")}</p>
+          <p className="text-gray-500">{t("vendors.totalReceived")}</p>
           <p>
             {formatTokenAmount(vendor.totalReceived)} {CHAIN_TOKEN_SYMBOL}
           </p>
         </div>
         <div>
-          <p className="text-white/50">{t("vendors.proposalsFunded")}</p>
+          <p className="text-gray-500">{t("vendors.proposalsFunded")}</p>
           <p>{vendor.proposalsFunded}</p>
         </div>
         <div>
-          <p className="text-white/50">{t("common.address")}</p>
+          <p className="text-gray-500">{t("common.address")}</p>
           <p>{truncateAddress(vendor.address, 8)}</p>
         </div>
       </div>
 
-      <div className="space-y-4 border-t border-white/10 pt-6">
+      <div className="space-y-4 border-t border-gray-200 pt-6">
         <h2 className="text-lg font-semibold">{t("vendorDetail.updatesTitle")}</h2>
 
         {isOwner ? (
-          <form onSubmit={handlePost} className="space-y-3 rounded-lg border border-white/10 p-4">
+          <form onSubmit={handlePost} className="space-y-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
             <div>
-              <label className="block text-sm font-medium text-white/80">
+              <label className="block text-sm font-medium text-gray-700">
                 {t("vendorDetail.postUpdate")}
               </label>
               <textarea
@@ -146,71 +140,63 @@ export default function VendorDetailPage({ params }: { params: Promise<{ address
                 rows={3}
                 maxLength={2048}
                 placeholder={t("vendorDetail.updatePlaceholder")}
-                className="mt-1 w-full rounded-md border border-white/20 bg-transparent px-3 py-2"
+                className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2"
               />
             </div>
             {ownProposals.length > 0 && (
               <div>
-                <label className="block text-sm font-medium text-white/80">
+                <label className="block text-sm font-medium text-gray-700">
                   {t("vendorDetail.linkProposal")}
                 </label>
                 <select
                   value={proposalId}
                   onChange={(event) => setProposalId(event.target.value)}
-                  className="mt-1 w-full rounded-md border border-white/20 bg-transparent px-3 py-2"
+                  className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2"
                 >
-                  <option value="" className="bg-zinc-900">
+                  <option value="" className="text-black">
                     {t("vendorDetail.noProposalOption")}
                   </option>
                   {ownProposals.map((p) => (
-                    <option key={p.id} value={p.id} className="bg-zinc-900">
+                    <option key={p.id} value={p.id} className="text-black">
                       #{p.id} — {p.title}
                     </option>
                   ))}
                 </select>
               </div>
             )}
-            {error && <p className="text-sm text-red-400">{error}</p>}
-            {success && <p className="text-sm text-emerald-400">{t("vendorDetail.postSuccess")}</p>}
-            <button
-              type="submit"
-              disabled={busy || !content.trim()}
-              className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-60"
-            >
+            {error && <p className="text-sm text-red-600">{error}</p>}
+            {success && <p className="text-sm text-emerald-600">{t("vendorDetail.postSuccess")}</p>}
+            <Button type="submit" disabled={busy || !content.trim()}>
               {busy ? t("vendorDetail.posting") : t("vendorDetail.post")}
-            </button>
+            </Button>
           </form>
         ) : accounts.length === 0 ? (
-          <button
-            type="button"
-            onClick={connect}
-            className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500"
-          >
+          <Button type="button" onClick={connect}>
             {t("wallet.connect")}
-          </button>
+          </Button>
         ) : (
-          <p className="text-sm text-white/50">{t("vendorDetail.onlyVendorCanPost")}</p>
+          <p className="text-sm text-gray-500">{t("vendorDetail.onlyVendorCanPost")}</p>
         )}
 
-        {updatesLoading && <p className="text-sm text-white/60">{t("common.loading")}</p>}
+        {updatesLoading && <p className="text-sm text-gray-500">{t("common.loading")}</p>}
         {!updatesLoading && updates.length === 0 && (
-          <p className="text-sm text-white/60">{t("vendorDetail.noUpdates")}</p>
+          <p className="text-sm text-gray-500">{t("vendorDetail.noUpdates")}</p>
         )}
         <div className="space-y-3">
           {updates.map((update) => {
             const relatedProposal =
               update.proposalId !== null ? proposals.find((p) => p.id === update.proposalId) : null;
             return (
-              <div key={update.id} className="rounded-lg border border-white/10 p-4">
+              <div key={update.id} className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
                 <div className="text-sm">
                   <TranslateButton text={update.content} />
                 </div>
-                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/50">
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
                   <span>{t("vendorDetail.postedAtBlock", { block: update.postedAt })}</span>
                   {relatedProposal && (
                     <Link
                       href={`/proposals/${relatedProposal.id}`}
-                      className="text-indigo-400 hover:text-indigo-300"
+                      className="text-[#1736F5] hover:text-[#122bc9]"
                     >
                       {t("vendorDetail.relatedProposal")}: #{relatedProposal.id} — {relatedProposal.title}
                     </Link>

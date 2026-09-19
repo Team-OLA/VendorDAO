@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "./ui/Button";
 
 type Stage = "idle" | "captcha" | "code" | "done";
 
@@ -90,25 +91,20 @@ export function EmailVerification({
   };
 
   if (verified) {
-    return <p className="text-sm text-emerald-400">✓ {t("registerVendor.emailVerified")}</p>;
+    return <p className="text-sm text-emerald-600">✓ {t("registerVendor.emailVerified")}</p>;
   }
 
   return (
-    <div className="space-y-2 rounded-md border border-white/10 bg-white/5 p-3">
+    <div className="space-y-2 rounded-md border border-gray-200 bg-gray-50 p-3">
       {stage === "idle" && (
-        <button
-          type="button"
-          disabled={!email || busy}
-          onClick={startChallenge}
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-60"
-        >
+        <Button type="button" disabled={!email || busy} onClick={startChallenge}>
           {t("registerVendor.verifyEmail")}
-        </button>
+        </Button>
       )}
 
       {stage === "captcha" && (
         <div className="space-y-2">
-          <p className="text-sm text-white/80">
+          <p className="text-sm text-gray-700">
             {t("registerVendor.captchaPrompt", { question })}
           </p>
           <div className="flex gap-2">
@@ -116,25 +112,20 @@ export function EmailVerification({
               value={captchaAnswer}
               onChange={(event) => setCaptchaAnswer(event.target.value)}
               inputMode="numeric"
-              className="w-24 rounded-md border border-white/20 bg-transparent px-3 py-1.5 text-sm"
+              className="w-24 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm"
             />
-            <button
-              type="button"
-              disabled={busy || !captchaAnswer}
-              onClick={sendCode}
-              className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-60"
-            >
+            <Button type="button" disabled={busy || !captchaAnswer} onClick={sendCode}>
               {t("registerVendor.sendCode")}
-            </button>
+            </Button>
           </div>
         </div>
       )}
 
       {stage === "code" && (
         <div className="space-y-2">
-          <p className="text-sm text-white/80">{t("registerVendor.enterCode")}</p>
+          <p className="text-sm text-gray-700">{t("registerVendor.enterCode")}</p>
           {devCode && (
-            <p className="text-xs text-amber-300">
+            <p className="text-xs text-amber-700">
               {t("registerVendor.devCodeNotice")} <strong>{devCode}</strong>
             </p>
           )}
@@ -145,21 +136,16 @@ export function EmailVerification({
               maxLength={6}
               inputMode="numeric"
               placeholder="123456"
-              className="w-28 rounded-md border border-white/20 bg-transparent px-3 py-1.5 text-sm"
+              className="w-28 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm"
             />
-            <button
-              type="button"
-              disabled={busy || code.length !== 6}
-              onClick={confirmCode}
-              className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-60"
-            >
+            <Button type="button" disabled={busy || code.length !== 6} onClick={confirmCode}>
               {t("registerVendor.confirmCode")}
-            </button>
+            </Button>
             <button
               type="button"
               disabled={busy}
               onClick={startChallenge}
-              className="text-xs text-indigo-400 underline underline-offset-2 hover:text-indigo-300"
+              className="text-xs text-[#1736F5] underline underline-offset-2 hover:text-[#122bc9]"
             >
               {t("registerVendor.resendCode")}
             </button>
@@ -167,7 +153,7 @@ export function EmailVerification({
         </div>
       )}
 
-      {error && <p className="text-xs text-red-400">{error}</p>}
+      {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
 }

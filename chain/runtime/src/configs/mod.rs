@@ -163,6 +163,19 @@ parameter_types! {
 	pub const VendorDaoVotingPeriod: BlockNumber = 7 * DAYS;
 	pub const VendorDaoMinimumQuorum: u32 = 5;
 	pub const VendorDaoMaxProposalAmount: Balance = 100_000 * UNIT;
+	/// KYC verifications are valid for roughly one year before residents must re-verify.
+	pub const VendorDaoKycValidityPeriod: BlockNumber = 365 * DAYS;
+}
+
+/// The only account allowed to call `stake_mint` — a fiat payment-gateway backend (e.g. the
+/// Stripe webhook handler) signs with this account's key after confirming an off-chain payment.
+/// Defaults to the well-known `--dev`/`--local` "Dave" account; override for a real deployment by
+/// changing this to your own dedicated payment-gateway account.
+pub struct PaymentGatewayAccounts;
+impl frame_support::traits::SortedMembers<AccountId> for PaymentGatewayAccounts {
+	fn sorted_members() -> alloc::vec::Vec<AccountId> {
+		alloc::vec![sp_keyring::Sr25519Keyring::Dave.to_account_id()]
+	}
 }
 
 /// Configure the VendorDAO pallet: open, transparent citywide vendor-funding governance.
@@ -181,5 +194,12 @@ impl pallet_vendor_dao::Config for Runtime {
 	type MaxBusinessAddressLen = ConstU32<256>;
 	type MaxWebsiteLen = ConstU32<256>;
 	type MaxUpdateContentLen = ConstU32<2048>;
+	type MaxDonorNameLen = ConstU32<128>;
+	type MaxGrantPurposeLen = ConstU32<2048>;
+	type MaxRejectionReasonLen = ConstU32<512>;
+	type KycValidityPeriod = VendorDaoKycValidityPeriod;
+	type MaxReceiptCategoryLen = ConstU32<64>;
+	type MaxReceiptDescriptionLen = ConstU32<2048>;
+	type PaymentGatewayOrigin = frame_system::EnsureSignedBy<PaymentGatewayAccounts, AccountId>;
 	type AdminOrigin = frame_system::EnsureRoot<AccountId>;
 }

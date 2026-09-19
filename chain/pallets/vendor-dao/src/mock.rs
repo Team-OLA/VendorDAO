@@ -1,15 +1,26 @@
 use crate as pallet_vendor_dao;
 use frame_support::{
 	derive_impl, parameter_types,
-	traits::{ConstU128, ConstU32, VariantCountOf},
+	traits::{ConstU128, ConstU32, SortedMembers, VariantCountOf},
 	PalletId,
 };
-use frame_system::EnsureRoot;
+use frame_system::{EnsureRoot, EnsureSignedBy};
 use sp_runtime::BuildStorage;
 
 type Block = frame_system::mocking::MockBlock<Test>;
 pub type AccountId = u64;
 pub type Balance = u128;
+
+/// The only account allowed to call `stake_mint` in tests (stands in for a Stripe payment
+/// gateway backend's own dedicated on-chain account).
+pub const PAYMENT_GATEWAY: AccountId = 99;
+
+pub struct PaymentGatewayAccounts;
+impl SortedMembers<AccountId> for PaymentGatewayAccounts {
+	fn sorted_members() -> Vec<AccountId> {
+		vec![PAYMENT_GATEWAY]
+	}
+}
 
 #[frame_support::runtime]
 mod runtime {
@@ -67,6 +78,7 @@ parameter_types! {
 	pub const VotingPeriod: u64 = 10;
 	pub const MinimumQuorum: u32 = 3;
 	pub const MaxProposalAmount: Balance = 1_000_000_000;
+	pub const KycValidityPeriod: u64 = 5;
 }
 
 impl pallet_vendor_dao::Config for Test {
@@ -84,6 +96,13 @@ impl pallet_vendor_dao::Config for Test {
 	type MaxBusinessAddressLen = ConstU32<128>;
 	type MaxWebsiteLen = ConstU32<128>;
 	type MaxUpdateContentLen = ConstU32<512>;
+	type MaxDonorNameLen = ConstU32<64>;
+	type MaxGrantPurposeLen = ConstU32<512>;
+	type MaxRejectionReasonLen = ConstU32<256>;
+	type KycValidityPeriod = KycValidityPeriod;
+	type MaxReceiptCategoryLen = ConstU32<64>;
+	type MaxReceiptDescriptionLen = ConstU32<512>;
+	type PaymentGatewayOrigin = EnsureSignedBy<PaymentGatewayAccounts, AccountId>;
 	type AdminOrigin = EnsureRoot<AccountId>;
 }
 

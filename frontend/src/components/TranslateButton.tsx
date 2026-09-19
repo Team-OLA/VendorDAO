@@ -18,7 +18,7 @@ export function TranslateButton({ text }: { text: string }) {
         <button
           type="button"
           onClick={() => setTranslated(null)}
-          className="text-xs text-indigo-400 underline underline-offset-2 hover:text-indigo-300"
+          className="text-xs text-[#1736F5] underline underline-offset-2 hover:text-[#122bc9]"
         >
           {t("proposalDetail.showOriginal")}
         </button>
@@ -43,11 +43,11 @@ export function TranslateButton({ text }: { text: string }) {
             setLoading(false);
           }
         }}
-        className="text-xs text-indigo-400 underline underline-offset-2 hover:text-indigo-300 disabled:opacity-60"
+        className="text-xs text-[#1736F5] underline underline-offset-2 hover:text-[#122bc9] disabled:opacity-60"
       >
         {loading ? t("proposalDetail.translating") : `🌐 ${t("proposalDetail.translate")}`}
       </button>
-      {error && <p className="text-xs text-red-400">{error}</p>}
+      {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
 }

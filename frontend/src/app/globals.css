@@ -1,21 +1,24 @@
 @import "tailwindcss";
 
-/* VendorDAO always renders on a dark canvas; components use white/opacity utility classes
-   throughout, so the theme is fixed rather than following prefers-color-scheme. */
+/* VendorDAO brand palette: blue (#1736F5) + gold (#FFC709) on a light, civic-clean canvas. */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #ffffff;
+  --foreground: #0b1333;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-sora);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-sora), var(--font-inter), sans-serif;
 }

@@ -5,17 +5,38 @@ import {
   DEMO_ADMIN,
   DEMO_CITIZEN,
   DEMO_MINIMUM_QUORUM,
+  createDemoDonors,
+  createDemoGrants,
   createDemoProposals,
+  createDemoRfps,
+  createDemoSpendingReceipts,
   createDemoTreasury,
   createDemoTreasuryContributions,
   createDemoVendorUpdates,
   createDemoVendors,
   type TreasuryContribution,
 } from "./data";
-import type { Proposal, ProposalStatus, TreasuryStats, VendorInfo, VendorUpdate } from "@/lib/types";
+import type {
+  DonorInfo,
+  Grant,
+  KycRecord,
+  Proposal,
+  ProposalStatus,
+  Rfp,
+  SpendingReceipt,
+  TreasuryStats,
+  VendorInfo,
+  VendorUpdate,
+} from "@/lib/types";
 import type { VendorCategory } from "@/lib/vendorCategories";
+import type { DonorType } from "@/lib/donorTypes";
+import type { Ward } from "@/lib/wards";
+import type { DocumentType } from "@/lib/documentTypes";
 
 const STORAGE_KEY = "vendordao-demo-mode";
+
+/** Roughly mirrors the chain's ~1-year KYC validity period, in demo "block" units. */
+const DEMO_KYC_VALIDITY_BLOCKS = 200_000;
 
 interface DemoModeValue {
   enabled: boolean;
@@ -41,13 +62,37 @@ interface DemoModeValue {
     title: string,
     description: string,
     amountPlanck: bigint,
+    ward: Ward,
+    rfpId: number | null,
   ) => void;
+  vetProposal: (id: number, approve: boolean) => void;
   vote: (id: number, approve: boolean) => void;
   closeProposal: (id: number) => void;
   disburse: (id: number) => void;
   cancelProposal: (id: number) => void;
   fundTreasury: (amountPlanck: bigint) => void;
   postVendorUpdate: (vendorAddress: string, content: string, proposalId: number | null) => void;
+  donors: DonorInfo[];
+  grants: Grant[];
+  stakedBalances: Record<string, string>;
+  registerDonor: (name: string, donorType: DonorType) => void;
+  submitGrant: (donorAddress: string, amountPlanck: bigint, purpose: string) => void;
+  stakeTokens: (address: string, amountPlanck: bigint) => void;
+  rfps: Rfp[];
+  postRfp: (title: string, description: string, ward: Ward, maxAmountPlanck: bigint) => void;
+  closeRfp: (id: number) => void;
+  kycRecords: Record<string, KycRecord>;
+  submitKyc: (ward: Ward, documentType: DocumentType, documentHash: string) => void;
+  setKycStatus: (address: string, approve: boolean, rejectionReason?: string) => void;
+  spendingReceipts: SpendingReceipt[];
+  postSpendingReceipt: (
+    proposalId: number,
+    vendorAddress: string,
+    amountPlanck: bigint,
+    category: string,
+    description: string,
+    attachmentHash: string | null,
+  ) => void;
   resetDemo: () => void;
 }
 
@@ -64,6 +109,12 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
   );
   const [votedProposalIds, setVotedProposalIds] = useState<number[]>([]);
   const [vendorUpdates, setVendorUpdates] = useState<VendorUpdate[]>(() => createDemoVendorUpdates());
+  const [donors, setDonors] = useState<DonorInfo[]>(() => createDemoDonors());
+  const [grants, setGrants] = useState<Grant[]>(() => createDemoGrants());
+  const [stakedBalances, setStakedBalances] = useState<Record<string, string>>({});
+  const [rfps, setRfps] = useState<Rfp[]>(() => createDemoRfps());
+  const [kycRecords, setKycRecords] = useState<Record<string, KycRecord>>({});
+  const [spendingReceipts, setSpendingReceipts] = useState<SpendingReceipt[]>(() => createDemoSpendingReceipts());
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -111,7 +162,14 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
   );
 
   const submitProposal = useCallback(
-    (vendorAddress: string, title: string, description: string, amountPlanck: bigint) => {
+    (
+      vendorAddress: string,
+      title: string,
+      description: string,
+      amountPlanck: bigint,
+      ward: Ward,
+      rfpId: number | null,
+    ) => {
       setProposals((prev) => {
         const newId = prev.length ? Math.max(...prev.map((p) => p.id)) + 1 : 0;
         const createdAt = prev.length ? Math.max(...prev.map((p) => p.votingEnd)) : 100;
@@ -122,11 +180,13 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
           title,
           description,
           amount: amountPlanck.toString(),
-          status: "Proposed",
+          status: "PendingReview",
           ayes: 0,
           nays: 0,
           createdAt,
-          votingEnd: createdAt + 14400,
+          votingEnd: createdAt,
+          ward,
+          rfpId,
         };
         return [next, ...prev];
       });
@@ -134,16 +194,39 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
     [],
   );
 
-  const vote = useCallback((id: number, approve: boolean) => {
-    setVotedProposalIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  const vetProposal = useCallback((id: number, approve: boolean) => {
     setProposals((prev) =>
-      prev.map((p) =>
-        p.id === id
-          ? { ...p, ayes: approve ? p.ayes + 1 : p.ayes, nays: approve ? p.nays : p.nays + 1 }
-          : p,
-      ),
+      prev.map((p) => {
+        if (p.id !== id || p.status !== "PendingReview") return p;
+        if (approve) {
+          return { ...p, status: "Proposed" as ProposalStatus, votingEnd: p.createdAt + 14400 };
+        }
+        return { ...p, status: "Vetoed" as ProposalStatus };
+      }),
     );
   }, []);
+
+  const vote = useCallback(
+    (id: number, approve: boolean) => {
+      const proposal = proposals.find((p) => p.id === id);
+      if (proposal && proposal.ward !== "Citywide") {
+        const record = kycRecords[DEMO_CITIZEN.address];
+        if (!record || record.status !== "Verified" || record.ward !== proposal.ward) {
+          throw new Error("Voting on this proposal is restricted to verified residents of its ward.");
+        }
+      }
+
+      setVotedProposalIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+      setProposals((prev) =>
+        prev.map((p) =>
+          p.id === id && p.status === "Proposed"
+            ? { ...p, ayes: approve ? p.ayes + 1 : p.ayes, nays: approve ? p.nays : p.nays + 1 }
+            : p,
+        ),
+      );
+    },
+    [proposals, kycRecords],
+  );
 
   const disburse = useCallback((id: number) => {
     setProposals((prevProposals) => {
@@ -201,7 +284,11 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
 
   const cancelProposal = useCallback((id: number) => {
     setProposals((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, status: "Cancelled" as ProposalStatus } : p)),
+      prev.map((p) =>
+        p.id === id && (p.status === "PendingReview" || p.status === "Proposed")
+          ? { ...p, status: "Cancelled" as ProposalStatus }
+          : p,
+      ),
     );
   }, []);
 
@@ -232,6 +319,12 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
     setTreasuryContributions(createDemoTreasuryContributions());
     setVotedProposalIds([]);
     setVendorUpdates(createDemoVendorUpdates());
+    setDonors(createDemoDonors());
+    setGrants(createDemoGrants());
+    setStakedBalances({});
+    setRfps(createDemoRfps());
+    setKycRecords({});
+    setSpendingReceipts(createDemoSpendingReceipts());
   }, []);
 
   const postVendorUpdate = useCallback(
@@ -244,6 +337,143 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
           vendor: vendorAddress,
           content,
           proposalId,
+          postedAt: latestBlock + 50,
+        };
+        return [next, ...prev];
+      });
+    },
+    [],
+  );
+
+  const registerDonor = useCallback((name: string, donorType: DonorType) => {
+    setDonors((prev) => {
+      if (prev.some((d) => d.address === DEMO_CITIZEN.address)) return prev;
+      const latestBlock = Math.max(0, ...prev.map((d) => d.registeredAt));
+      return [
+        ...prev,
+        {
+          address: DEMO_CITIZEN.address,
+          name,
+          donorType,
+          registeredAt: latestBlock + 100,
+          totalContributed: "0",
+          grantsMade: 0,
+        },
+      ];
+    });
+  }, []);
+
+  const submitGrant = useCallback((donorAddress: string, amountPlanck: bigint, purpose: string) => {
+    setGrants((prev) => {
+      const newId = prev.length ? Math.max(...prev.map((g) => g.id)) + 1 : 0;
+      const latestBlock = Math.max(0, ...prev.map((g) => g.submittedAt));
+      const next: Grant = {
+        id: newId,
+        donor: donorAddress,
+        amount: amountPlanck.toString(),
+        purpose,
+        submittedAt: latestBlock + 50,
+      };
+      return [next, ...prev];
+    });
+    setDonors((prev) =>
+      prev.map((d) =>
+        d.address === donorAddress
+          ? {
+              ...d,
+              totalContributed: (BigInt(d.totalContributed) + amountPlanck).toString(),
+              grantsMade: d.grantsMade + 1,
+            }
+          : d,
+      ),
+    );
+    setTreasury((prev) => ({
+      ...prev,
+      potBalance: (BigInt(prev.potBalance) + amountPlanck).toString(),
+      totalReceived: (BigInt(prev.totalReceived) + amountPlanck).toString(),
+    }));
+  }, []);
+
+  const stakeTokens = useCallback((address: string, amountPlanck: bigint) => {
+    setStakedBalances((prev) => {
+      const current = BigInt(prev[address] ?? "0");
+      return { ...prev, [address]: (current + amountPlanck).toString() };
+    });
+  }, []);
+
+  const postRfp = useCallback((title: string, description: string, ward: Ward, maxAmountPlanck: bigint) => {
+    setRfps((prev) => {
+      const newId = prev.length ? Math.max(...prev.map((r) => r.id)) + 1 : 0;
+      const latestBlock = Math.max(0, ...prev.map((r) => r.createdAt));
+      const next: Rfp = {
+        id: newId,
+        title,
+        description,
+        ward,
+        maxAmount: maxAmountPlanck.toString(),
+        status: "Open",
+        createdAt: latestBlock + 50,
+      };
+      return [next, ...prev];
+    });
+  }, []);
+
+  const closeRfp = useCallback((id: number) => {
+    setRfps((prev) => prev.map((r) => (r.id === id ? { ...r, status: "Closed" as const } : r)));
+  }, []);
+
+  const submitKyc = useCallback((ward: Ward, documentType: DocumentType, documentHash: string) => {
+    setKycRecords((prev) => ({
+      ...prev,
+      [DEMO_CITIZEN.address]: {
+        ward,
+        documentType,
+        documentHash,
+        status: "Pending",
+        submittedAt: 0,
+        verifiedAt: null,
+        expiresAt: null,
+        rejectionReason: null,
+      },
+    }));
+  }, []);
+
+  const setKycStatus = useCallback((address: string, approve: boolean, rejectionReason?: string) => {
+    setKycRecords((prev) => {
+      const record = prev[address];
+      if (!record || record.status !== "Pending") return prev;
+      return {
+        ...prev,
+        [address]: approve
+          ? { ...record, status: "Verified", verifiedAt: 100, expiresAt: 100 + DEMO_KYC_VALIDITY_BLOCKS }
+          : { ...record, status: "Rejected", verifiedAt: null, expiresAt: null, rejectionReason: rejectionReason ?? null },
+      };
+    });
+  }, []);
+
+  const postSpendingReceipt = useCallback(
+    (
+      proposalId: number,
+      vendorAddress: string,
+      amountPlanck: bigint,
+      category: string,
+      description: string,
+      attachmentHash: string | null,
+    ) => {
+      setSpendingReceipts((prev) => {
+        const receiptsForProposal = prev.filter((r) => r.proposalId === proposalId);
+        const newId = receiptsForProposal.length
+          ? Math.max(...receiptsForProposal.map((r) => r.id)) + 1
+          : 0;
+        const latestBlock = Math.max(0, ...prev.map((r) => r.postedAt));
+        const next: SpendingReceipt = {
+          id: newId,
+          proposalId,
+          vendor: vendorAddress,
+          amount: amountPlanck.toString(),
+          category,
+          description,
+          attachmentHash,
           postedAt: latestBlock + 50,
         };
         return [next, ...prev];
@@ -266,12 +496,27 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
       vendorUpdates,
       registerVendor,
       submitProposal,
+      vetProposal,
       vote,
       closeProposal,
       disburse,
       cancelProposal,
       fundTreasury,
       postVendorUpdate,
+      donors,
+      grants,
+      stakedBalances,
+      registerDonor,
+      submitGrant,
+      stakeTokens,
+      rfps,
+      postRfp,
+      closeRfp,
+      kycRecords,
+      submitKyc,
+      setKycStatus,
+      spendingReceipts,
+      postSpendingReceipt,
       resetDemo,
     }),
     [
@@ -285,12 +530,27 @@ export function DemoModeProvider({ children }: { children: React.ReactNode }) {
       vendorUpdates,
       registerVendor,
       submitProposal,
+      vetProposal,
       vote,
       closeProposal,
       disburse,
       cancelProposal,
       fundTreasury,
       postVendorUpdate,
+      donors,
+      grants,
+      stakedBalances,
+      registerDonor,
+      submitGrant,
+      stakeTokens,
+      rfps,
+      postRfp,
+      closeRfp,
+      kycRecords,
+      submitKyc,
+      setKycStatus,
+      spendingReceipts,
+      postSpendingReceipt,
       resetDemo,
     ],
   );

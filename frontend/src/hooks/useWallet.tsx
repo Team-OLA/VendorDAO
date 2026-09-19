@@ -16,14 +16,15 @@ interface WalletValue {
 const WalletContext = createContext<WalletValue | null>(null);
 
 export function WalletProvider({ children }: { children: React.ReactNode }) {
-  const { enabled: demoEnabled, citizen, vendors } = useDemoMode();
+  const { enabled: demoEnabled, citizen, admin, vendors, donors } = useDemoMode();
   const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>([]);
   const [selected, setSelected] = useState<InjectedAccountWithMeta | null>(null);
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Demo mode has no real wallet: auto-"connect" a stand-in Detroit resident account, plus one
-  // account per registered vendor so their own update-posting flow can be tried out.
+  // account per registered vendor/donor (and a city-admin account for vetting proposals) so
+  // every role's flows can be tried out.
   useEffect(() => {
     if (!demoEnabled) {
       setAccounts([]);
@@ -38,11 +39,25 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       address: vendor.address,
       meta: { name: `${vendor.name} (Vendor)`, source: "demo" },
     }));
-    const all = [citizenAccount, ...vendorAccounts];
+    // The city-admin identity is intentionally reused as the "City of Detroit" donor, so don't
+    // list its address twice -- fold the admin label into that donor's entry instead.
+    const donorAccounts: InjectedAccountWithMeta[] = donors.map((donor) => ({
+      address: donor.address,
+      meta: {
+        name: donor.address === admin.address ? `${donor.name} (Donor, Admin)` : `${donor.name} (Donor)`,
+        source: "demo",
+      },
+    }));
+    const adminIsDonor = donors.some((donor) => donor.address === admin.address);
+    const adminAccount: InjectedAccountWithMeta | null = adminIsDonor
+      ? null
+      : { address: admin.address, meta: { name: `${admin.name} (Admin)`, source: "demo" } };
+    const all = [citizenAccount, ...(adminAccount ? [adminAccount] : []), ...vendorAccounts, ...donorAccounts];
     setAccounts(all);
     setSelected((current) => all.find((a) => a.address === current?.address) ?? citizenAccount);
     setError(null);
-  }, [demoEnabled, citizen, vendors]);
+  }, [demoEnabled, citizen, admin, vendors, donors]);
+
 
   const connect = useCallback(async () => {
     if (demoEnabled) return; // already auto-connected above

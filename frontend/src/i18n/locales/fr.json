@@ -3,7 +3,7 @@
     "name": "VendorDAO",
     "tagline": "Financement des fournisseurs municipaux, ouvert et transparent, propulsé par Polkadot."
   },
-  "nav": { "dashboard": "Tableau de bord", "proposals": "Propositions", "vendors": "Fournisseurs", "ledger": "Registre" },
+  "nav": { "dashboard": "Tableau de bord", "proposals": "Propositions", "rfps": "Appels d'offres", "vendors": "Fournisseurs", "donors": "Donateurs", "map": "Carte", "stake": "Investir", "kyc": "KYC", "ledger": "Registre", "menu": "Menu" },
   "wallet": {
     "connect": "Connecter le portefeuille",
     "connecting": "Connexion…",
@@ -24,11 +24,13 @@
     "categoryBreakdown": "Financement par Catégorie"
   },
   "status": {
+    "PendingReview": "En Attente d'examen",
     "Proposed": "Vote en cours",
     "Approved": "Approuvée",
     "Rejected": "Rejetée",
     "Funded": "Financée",
-    "Cancelled": "Annulée"
+    "Cancelled": "Annulée",
+    "Vetoed": "Opposée"
   },
   "proposals": {
     "title": "Propositions",
@@ -50,10 +52,32 @@
     "connectToVote": "Connectez votre portefeuille pour voter.",
     "closeVoting": "Dépouiller les votes",
     "retryDisbursement": "Réessayer le décaissement",
+    "vetApprove": "Approuver pour le vote",
+    "vetVeto": "Opposer son veto",
+    "pendingReviewNotice": "Cette proposition est en attente d'examen par un administrateur avant d'être soumise au vote de la communauté.",
+    "vetoedNotice": "Cette proposition a fait l'objet d'un veto d'un administrateur et n'a jamais été soumise au vote.",
+    "respondingToRfp": "Réponse à l'appel d'offres",
+    "wardRestrictedNotice": "Le vote sur cette proposition est réservé aux résidents vérifiés de {{ward}}. Faites-vous vérifier sur",
     "translate": "Traduire",
     "showOriginal": "Afficher l'original",
     "translating": "Traduction…",
-    "notFound": "Proposition introuvable."
+    "notFound": "Proposition introuvable.",
+    "fundsBreakdown": "Répartition des Fonds",
+    "receiptedOfDisbursed": "{{receipted}} sur {{disbursed}} {{symbol}} justifiés",
+    "remainingToReceipt": "{{amount}} {{symbol}} restant à justifier",
+    "noReceipts": "Aucune dépense n'a encore été justifiée.",
+    "postReceipt": "Publier un Justificatif de Dépense",
+    "postingReceipt": "Publication…",
+    "receiptCategoryLabel": "Catégorie",
+    "receiptAmountLabel": "Montant",
+    "receiptDescriptionLabel": "À quoi cela a-t-il servi ?",
+    "receiptExceedsRemaining": "Ce montant dépasse ce qu'il reste à justifier pour cette proposition.",
+    "receiptAttachmentLabel": "Joindre une photo du reçu ou un PDF (facultatif)",
+    "attachmentHint": "Seule une empreinte cryptographique de ce fichier est soumise sur la chaîne ; le fichier lui-même reste uniquement dans votre navigateur.",
+    "attachmentTooLarge": "Ce fichier est trop volumineux à joindre (2 Mo maximum).",
+    "receiptAttachmentAlt": "Aperçu du justificatif joint",
+    "viewAttachment": "Voir la pièce jointe",
+    "attachmentOnFile": "Pièce jointe enregistrée (empreinte {{hash}}…) — aperçu indisponible sur cet appareil"
   },
   "newProposal": {
     "title": "Soumettre une proposition",
@@ -61,6 +85,10 @@
     "selectVendor": "Sélectionnez un fournisseur enregistré",
     "titleLabel": "Titre",
     "descriptionLabel": "Description",
+    "wardLabel": "Quartier / District",
+    "wardHint": "Choisissez « Toute la ville » si cette proposition n'est pas propre à un district — les propositions à l'échelle de la ville sont ouvertes à tous les électeurs.",
+    "respondingToRfp": "Réponse à l'appel d'offres : {{title}}.",
+    "rfpMaxAmount": "Montant maximum : {{amount}} {{symbol}}.",
     "amountLabel": "Montant demandé",
     "submit": "Soumettre la proposition",
     "submitting": "Envoi…",
@@ -139,7 +167,12 @@
     "description": "Description",
     "amount": "Montant",
     "party": "Partie",
-    "empty": "Aucune transaction pour l'instant."
+    "empty": "Aucune transaction pour l'instant.",
+    "spendingBreakdown": "Où est Allé l'Argent",
+    "byWard": "Décaissé par Quartier/Circonscription",
+    "byCategory": "Décaissé par Catégorie de Fournisseur",
+    "topVendors": "Fournisseurs les Plus Financés",
+    "noSpending": "Aucun fonds n'a encore été décaissé."
   },
   "ledgerType": {
     "TreasuryContribution": "Contribution au Trésor",
@@ -147,7 +180,10 @@
     "ProposalSubmitted": "Proposition Soumise",
     "ProposalFunded": "Proposition Financée",
     "ProposalRejected": "Proposition Rejetée",
-    "ProposalCancelled": "Proposition Annulée"
+    "ProposalCancelled": "Proposition Annulée",
+    "DonorRegistered": "Donateur Enregistré",
+    "GrantSubmitted": "Subvention Soumise",
+    "TokensStaked": "Jetons Investis"
   },
   "vendorDetail": {
     "back": "Retour aux fournisseurs",
@@ -164,5 +200,137 @@
     "posting": "Publication…",
     "onlyVendorCanPost": "Connectez le portefeuille de ce fournisseur pour publier des mises à jour.",
     "postSuccess": "Mise à jour publiée !"
+  },
+  "donorType": {
+    "Individual": "Particulier",
+    "Foundation": "Fondation",
+    "Corporation": "Entreprise",
+    "Government": "Gouvernement",
+    "Other": "Autre"
+  },
+  "registerDonor": {
+    "title": "S'inscrire comme Donateur",
+    "nameLabel": "Nom du Donateur / de l'Organisation",
+    "typeLabel": "Type de Donateur",
+    "submit": "S'inscrire",
+    "submitting": "Inscription\u2026"
+  },
+  "donors": {
+    "title": "Registre des Donateurs et Subventions",
+    "subtitle": "Chaque donateur enregistré et chaque subvention nommée au trésor public \u2014 entièrement publique et vérifiable.",
+    "registerNew": "S'inscrire comme Donateur",
+    "empty": "Aucun donateur enregistré pour le moment.",
+    "totalContributed": "Total Contribué",
+    "grantsMade": "Subventions Réalisées",
+    "submitGrant": "Soumettre une Subvention",
+    "submittingGrant": "Envoi\u2026",
+    "grantAmountLabel": "Montant de la Subvention",
+    "grantPurposeLabel": "Objet",
+    "recentGrants": "Subventions Récentes",
+    "noGrants": "Aucune subvention soumise pour le moment."
+  },
+  "stake": {
+    "title": "Investir en VDAO",
+    "subtitle": "Achetez des VDAO par carte via Stripe \u2014 1 $ = 1 VDAO.",
+    "currentBalance": "Solde Actuel",
+    "amountLabel": "Montant (USD)",
+    "rateNote": "Vous recevrez {{amount}} VDAO.",
+    "payWithStripe": "Payer avec Stripe",
+    "processing": "Traitement\u2026",
+    "notConfiguredNotice": "Stripe n'est pas encore configuré sur ce serveur. Voir STRIPE_SECRET_KEY dans .env.local.example.",
+    "success": "Paiement réussi ! Vos VDAO seront crédités sous peu.",
+    "canceled": "Paiement annulé."
+  },
+  "map": {
+    "title": "Carte Civique",
+    "subtitle": "Fournisseurs, projets financés et appels d'offres ouverts à Detroit, propulsé par Google Maps.",
+    "unavailable": "Google Maps n'est pas configuré sur ce serveur. Affichage de liens simples à la place :",
+    "layerVendors": "Fournisseurs",
+    "layerProjects": "Projets Financés",
+    "layerRfps": "Appels d'Offres Ouverts",
+    "categoryFilter": "Catégorie",
+    "wardFilter": "District",
+    "allCategories": "Tous",
+    "allWards": "Tous",
+    "legendTitle": "Légende",
+    "legendVendor": "Fournisseur",
+    "legendProject": "Projet Financé",
+    "legendRfp": "Appel d'Offres Ouvert",
+    "viewVendor": "Voir le fournisseur",
+    "viewProject": "Voir le projet",
+    "viewRfp": "Voir l'appel d'offres"
+  },
+  "ward": {
+    "District1": "District 1",
+    "District2": "District 2",
+    "District3": "District 3",
+    "District4": "District 4",
+    "District5": "District 5",
+    "District6": "District 6",
+    "District7": "District 7",
+    "Citywide": "Toute la ville"
+  },
+  "rfpStatus": {
+    "Open": "Ouvert",
+    "Closed": "Fermé"
+  },
+  "documentType": {
+    "Passport": "Passeport",
+    "DriversLicense": "Permis de Conduire",
+    "StateId": "Carte d'Identité d'État",
+    "NationalId": "Carte d'Identité Nationale"
+  },
+  "rfps": {
+    "title": "Appels d'offres (RFP)",
+    "subtitle": "Besoins civiques publiés par la ville auxquels les fournisseurs peuvent répondre, organisés par quartier/district.",
+    "postNew": "Publier un nouvel appel d'offres",
+    "empty": "Aucun appel d'offres publié pour l'instant.",
+    "maxAmount": "Montant Maximum",
+    "respond": "Répondre par une proposition",
+    "close": "Clôturer l'appel d'offres",
+    "titleLabel": "Titre",
+    "descriptionLabel": "Description",
+    "wardLabel": "Quartier / District",
+    "maxAmountLabel": "Montant Maximum",
+    "submit": "Publier l'appel d'offres",
+    "submitting": "Publication…",
+    "notFound": "Appel d'offres introuvable.",
+    "back": "Retour aux appels d'offres",
+    "responses": "Propositions en réponse",
+    "noResponses": "Aucune proposition n'a encore répondu à cet appel d'offres."
+  },
+  "kyc": {
+    "title": "Vérification des résidents (KYC)",
+    "subtitle": "Vérifiez votre identité et déclarez votre quartier/district pour voter sur les propositions propres à un district.",
+    "statusLabel": "Statut",
+    "status": {
+      "NotStarted": "Non commencé",
+      "Pending": "En attente d'examen",
+      "Verified": "Vérifié",
+      "Rejected": "Rejeté",
+      "Expired": "Expiré"
+    },
+    "documentTypeLabel": "Type de Document d'Identité",
+    "fullNameLabel": "Nom Légal Complet",
+    "dobLabel": "Date de Naissance",
+    "documentNumberLabel": "Numéro du Document d'Identité",
+    "privacyNotice": "Votre nom, votre date de naissance et votre numéro de document sont hachés sur votre appareil et ne sont jamais envoyés à VendorDAO ni stockés par celui-ci — seul un hachage cryptographique à sens unique est soumis sur la chaîne.",
+    "validUntilBlock": "Valide jusqu'au bloc {{block}}",
+    "expiredAtBlock": "Expiré au bloc {{block}} — veuillez vous revérifier",
+    "rejectionReasonLabel": "Motif",
+    "rejectReasonPlaceholder": "Motif du rejet (facultatif)",
+    "wardLabel": "Quartier / District",
+    "wardHint": "Ceci est verrouillé une fois que la ville a vérifié votre demande, afin que les votes propres à un district restent liés à de vrais résidents.",
+    "verifyWithStripe": "Vérifier l'identité avec Stripe",
+    "verifying": "Vérification…",
+    "stripeNotConfiguredNotice": "La vérification d'identité n'est pas encore configurée sur ce serveur ; cette demande sera donc examinée comme une déclaration de district autodéclarée. Voir NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY dans .env.local.example.",
+    "stripeVerifiedNotice": "Identité vérifiée avec Stripe.",
+    "submit": "Soumettre pour examen municipal",
+    "submitting": "Envoi…",
+    "pendingNotice": "Votre demande est en attente d'examen municipal.",
+    "adminPendingTitle": "Demandes KYC en attente",
+    "adminEmpty": "Aucune demande KYC en attente.",
+    "approve": "Approuver",
+    "reject": "Rejeter"
   }
 }

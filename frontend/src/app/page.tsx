@@ -16,8 +16,8 @@ import { CHAIN_TOKEN_SYMBOL, formatTokenAmount, truncateAddress } from "@/lib/ch
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-white/10 p-4">
-      <p className="text-sm text-white/60">{label}</p>
+    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+      <p className="text-sm text-gray-500">{label}</p>
       <p className="mt-1 text-2xl font-semibold">{value}</p>
     </div>
   );
@@ -39,11 +39,11 @@ export default function DashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-semibold">{t("app.name")}</h1>
-        <p className="mt-1 max-w-2xl text-white/70">{t("dashboard.subtitle")}</p>
+        <p className="mt-1 max-w-2xl text-gray-600">{t("dashboard.subtitle")}</p>
       </div>
 
       {apiError && (
-        <p className="rounded-md border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">
+        <p className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
           {apiError}
         </p>
       )}
@@ -62,9 +62,9 @@ export default function DashboardPage() {
           value={stats ? `${formatTokenAmount(stats.totalDisbursed)} ${CHAIN_TOKEN_SYMBOL}` : "—"}
         />
       </div>
-      {treasuryError && <p className="text-sm text-red-400">{treasuryError}</p>}
+      {treasuryError && <p className="text-sm text-red-600">{treasuryError}</p>}
       {stats && (
-        <p className="text-xs text-white/50">
+        <p className="text-xs text-gray-500">
           {t("dashboard.potAddress")}: {truncateAddress(stats.potAddress, 8)}
         </p>
       )}
@@ -72,11 +72,11 @@ export default function DashboardPage() {
       <FundTreasuryForm api={api} onFunded={refreshTreasury} />
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-white/10 p-4">
+        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
           <h2 className="mb-2 text-lg font-medium">{t("dashboard.fundingHistory")}</h2>
           <FundingHistoryChart data={fundingHistory} />
         </div>
-        <div className="rounded-lg border border-white/10 p-4">
+        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
           <h2 className="mb-2 text-lg font-medium">{t("dashboard.categoryBreakdown")}</h2>
           <CategoryBreakdownChart data={categoryBreakdown} />
         </div>
@@ -85,18 +85,18 @@ export default function DashboardPage() {
       <div>
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-medium">{t("dashboard.recentProposals")}</h2>
-          <Link href="/proposals" className="text-sm text-indigo-400 hover:text-indigo-300">
+          <Link href="/proposals" className="text-sm text-[#1736F5] hover:text-[#122bc9]">
             {t("dashboard.viewAll")} →
           </Link>
         </div>
-        {proposalsError && <p className="mt-2 text-sm text-red-400">{proposalsError}</p>}
+        {proposalsError && <p className="mt-2 text-sm text-red-600">{proposalsError}</p>}
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {proposals.slice(0, 4).map((proposal) => (
             <ProposalCard key={proposal.id} proposal={proposal} />
           ))}
         </div>
         {proposals.length === 0 && !proposalsError && (
-          <p className="mt-4 text-sm text-white/60">{t("proposals.empty")}</p>
+          <p className="mt-4 text-sm text-gray-500">{t("proposals.empty")}</p>
         )}
       </div>
     </div>
