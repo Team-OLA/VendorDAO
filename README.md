@@ -1,4 +1,5 @@
 # VendorDAO
+*A working platform connecting Detroit’s project opportunities, community participation and funding records.*
 
 **VendorDAO** is a blockchain application for **open, transparent, citywide vendor funding**,
 powered by [Polkadot](https://polkadot.com/) and the [Polkadot SDK](https://polkadot.com/platform/sdk/)
